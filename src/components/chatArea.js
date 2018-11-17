@@ -1,13 +1,30 @@
 import React, {Component} from 'react';
-
-export default class ChatArea extends Component {
+import {connect} from 'react-redux';
+export class ChatArea extends Component {
 
   render() {
+    const chatMessages = this.props.messages.map((message, idx) => {
+      return (
+      <li key={idx}>
+        <span>{message}</span>
+      </li>
+      )
+    })
     return(
       <div>
-        <span>Text 1234</span>
+        text
+        <ul>
+          {chatMessages}
+        </ul>
       </div>
-
     )
   }
 }
+
+const mapStatetoProps = (state) => {
+  console.log(state);
+  return ({
+    messages: state.chatWindow
+  })
+}
+export default connect(mapStatetoProps)(ChatArea)
