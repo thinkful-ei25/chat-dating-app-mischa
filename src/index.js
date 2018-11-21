@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import './index.css';
-import Chat from './components/chat-date'
+import Chat from './components/chat-components/chat-date'
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Chat />
+    <Router>
+      <Chat />
+    </Router>
   </Provider>
   
 , document.getElementById('root'));
