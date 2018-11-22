@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {startChatRoom} from '../../actions/chat';
+import {startChatRoom} from '../../actions/chat-room';
+import {withRouter} from 'react-router-dom';
 // import {Link, Redirect} from 'react-router-dom';
 
 export class NewChatRoom extends Component {
   onClickHandler(){
-    this.props.dispatch(startChatRoom())
+    this.props.dispatch(startChatRoom(this.props.history))
   }
   render(){
     return (
@@ -16,4 +17,4 @@ export class NewChatRoom extends Component {
 
 }
 
-export default connect()(NewChatRoom)
+export default withRouter(connect()(NewChatRoom));

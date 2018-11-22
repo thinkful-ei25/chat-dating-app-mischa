@@ -27,6 +27,7 @@ export class Chat extends Component {
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/chat-area' component={ChatArea} />
         <Route exact path="/register" component={RegistrationPage} />
+        <Route exact path="/chat-room/:newRoom" component={ChatArea} />
       </div>
       
     )

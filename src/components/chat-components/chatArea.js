@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {fetchMessages}  from '../../actions/chat';
-import {logout} from '../../actions/auth';
+// import {logout} from '../../actions/auth';
 import Input from './input';
 import Logout from './logout';
 import $ from 'jquery';
@@ -28,7 +28,8 @@ export class ChatArea extends Component {
   componentDidMount(){
     // console.log(this.props.loggedIn);
     this.interval = setInterval(() => {
-      this.props.dispatch(fetchMessages());
+      // console.log('room id from chatarea:', this.props.roomId);
+      this.props.dispatch(fetchMessages({roomId: this.props.roomId}));
     }, 1000 * 60)
     
     //logout automatically if user closes window (don't remove authkey)
@@ -51,43 +52,40 @@ export class ChatArea extends Component {
   //   );
 
   render() {
-    console.log(this.props.user) 
 
     //while null have loading 
-    if (this.props.user === null) {
+    if (this.props.users === null) {
       return <Redirect to="/" />;
     }
     const chatMessages = this.props.messages.map((message) => {
       return (
       <li key={message.id}>
-        <span>{message.user.username}: {message.message}</span>
+        <span>{message.userName}: {message.message}</span>
       </li>
       )
     })
     return(
-      <React.Fragment>
+      <Fragment>
         <div>
-          Messages
-        <ul style={{"listStyleType": "none"}}>
-          {chatMessages}
-        </ul>
-        <Input /> 
-      </div>
-      <div>
-        <Logout /> 
-      </div>
-      {/* <button onClick={() => this.logOutOnClose()}>OnClose</button> */}
-      </React.Fragment>
-      
+            Messages
+          <ul style={{"listStyleType": "none"}}>
+            {chatMessages}
+          </ul>
+          <Input /> 
+        </div>
+        <div>
+          <Logout /> 
+        </div>
+      </Fragment>
     )
   }
 }
 
 const mapStatetoProps = (state) => {
-  // console.log(state.auth.currentUser.loggedIn);
   return ({
     messages: state.chat.chatWindow,
-    user: state.auth.currentUser,
+    users: state.auth.currentUser,
+    roomId: state.chatroom.roomId
   })
 }
 export default connect(mapStatetoProps)(ChatArea)

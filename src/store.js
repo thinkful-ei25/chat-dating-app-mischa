@@ -2,6 +2,7 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import chatReducer from './reducers/chat';
 import authReducer from './reducers/auth';
+import chatroomReducer from './reducers/chat-room';
 import {loadAuthToken} from './local-storage';
 import {setAuthToken, refreshAuthToken} from './actions/auth'; 
 import thunk from 'redux-thunk';
@@ -10,7 +11,8 @@ const store = createStore(
   combineReducers({
     form: formReducer,
     chat: chatReducer,
-    auth: authReducer
+    auth: authReducer,
+    chatroom: chatroomReducer
   })
   , applyMiddleware(thunk));
 

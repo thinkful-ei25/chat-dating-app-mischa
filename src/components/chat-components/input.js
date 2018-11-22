@@ -9,7 +9,13 @@ export class Input extends Component {
       <form onSubmit={
         (e) => {
           e.preventDefault();
-          this.props.dispatch(postMessage({user: this.props.username, message: this.chat.value}));
+          this.props.dispatch(postMessage(
+            {
+              user: this.props.username, 
+              roomId: this.props.roomId,
+              message: this.chat.value
+            }
+            ));
           this.chat.value = '';
         }
       }>
@@ -21,8 +27,10 @@ export class Input extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  // console.log(state.auth.currentUser.username);
   return (
-    {username: state.auth.currentUser.username}
+    {
+      username: state.auth.currentUser.username,
+      roomId: state.chatroom.roomId
+    }
   )}
 export default connect(mapStateToProps)(Input);
