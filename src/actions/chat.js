@@ -1,5 +1,6 @@
 
 import {API_BASE_URL} from '../config';
+import {refreshChatroomState} from './chat-room';
 
 export const FETCHMESSAGES = 'FETCHMESSAGES';
 export const fetchMessagesRequest = () => ({
@@ -18,29 +19,30 @@ export const fetchMessagesError = (err) => ({
   err
 });
 
-export const fetchMessages = () => (dispatch, getState) => {
-  const state = getState();
-  const roomId = state.chatroom.roomId;
+export const fetchMessages = (path) => (dispatch, getState, location) => {
+  console.log(path);
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
   return (
       fetch(`${API_BASE_URL}/api/chat-window/`, {
         method: 'GET',
-        headers: {Authorization: `Bearer ${authToken}`, roomId}
+        headers: {Authorization: `Bearer ${authToken}`, path}
       })
       .then(response => {
         return response.json();
       })
       .then(data => {
         console.log(data);
-        dispatch(fetchMessagesSuccess(data))
+        const {id, users, url} = data;
+        dispatch(fetchMessagesSuccess(data));
+        dispatch(refreshChatroomState(id, users, url));
       })
         .catch(err => dispatch(fetchMessagesError(err)))
   )
 }
 
 export const postMessage = (messageData) => (dispatch, getState) => {
-  // const updatedMessage = `anon says: ${message}`;
+  console.log(messageData);
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/api/chat-window`, {
       method: 'POST',
@@ -53,7 +55,7 @@ export const postMessage = (messageData) => (dispatch, getState) => {
   })
       .then(res => {
         // res.json();
-        dispatch(fetchMessages());
+        dispatch(fetchMessages(messageData.path));
       })
       .catch(err => {
           const {reason} = err;

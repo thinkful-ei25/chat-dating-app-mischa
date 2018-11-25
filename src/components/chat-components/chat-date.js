@@ -18,7 +18,6 @@ const divStyle = {
 
 }
 export class Chat extends Component {
-
   render() {
     return(
       <div style={divStyle}>

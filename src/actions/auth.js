@@ -114,8 +114,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 
 export const logout = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken; 
-  clearAuthToken();
-  dispatch(clearAuth());
   return fetch(`${API_BASE_URL}/auth/logout`, {
     method: 'GET',
     headers: {
@@ -123,4 +121,12 @@ export const logout = () => (dispatch, getState) => {
       Authorization: `Bearer ${authToken}`
     }
   })
+    .then((response) => {
+        if (response.ok){
+            clearAuthToken();
+            dispatch(clearAuth());
+        }
+       
+    })
+    .catch(err => dispatch(authError(err)));
 }

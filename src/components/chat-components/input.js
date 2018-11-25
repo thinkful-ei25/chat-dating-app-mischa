@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
 import {postMessage}  from '../../actions/chat';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 export class Input extends Component {
 
   render() {
     return(
       <form onSubmit={
+
         (e) => {
           e.preventDefault();
           this.props.dispatch(postMessage(
             {
-              user: this.props.username, 
+              username: this.props.username, 
+              userId: this.props.userId,
               roomId: this.props.roomId,
-              message: this.chat.value
+              message: this.chat.value,
+              path: this.props.location.pathname
             }
             ));
           this.chat.value = '';
@@ -29,8 +33,9 @@ export class Input extends Component {
 const mapStateToProps = (state) => {
   return (
     {
-      username: state.auth.currentUser.username,
+      userId: state.auth.currentUser ? state.auth.currentUser.id : null,
+      username: state.auth.currentUser ? state.auth.currentUser.username : null,
       roomId: state.chatroom.roomId
     }
   )}
-export default connect(mapStateToProps)(Input);
+export default withRouter(connect(mapStateToProps)(Input));

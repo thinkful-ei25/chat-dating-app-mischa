@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {startChatRoom} from '../../actions/chat-room';
 import {withRouter} from 'react-router-dom';
-// import {Link, Redirect} from 'react-router-dom';
 
 export class NewChatRoom extends Component {
   onClickHandler(){
@@ -13,8 +12,6 @@ export class NewChatRoom extends Component {
       <button onClick={()=>this.onClickHandler()}>Open Room</button>
     )
   }
-
-
 }
 
 export default withRouter(connect()(NewChatRoom));

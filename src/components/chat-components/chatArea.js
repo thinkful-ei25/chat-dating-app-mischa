@@ -1,11 +1,13 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
-import {fetchMessages}  from '../../actions/chat';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { fetchMessages }  from '../../actions/chat';
+import LeaveChatRoom from './leaveRoom';
+import { logOutOnClose } from '../../utils'
 // import {logout} from '../../actions/auth';
 import Input from './input';
 import Logout from './logout';
-import $ from 'jquery';
-import {Redirect} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
+
 //import jquery --> use .ajax methoed https://stackoverflow.com/questions/4945932/window-onbeforeunload-ajax-request-in-chrome/20322988#20322988
 //window.addEventListener('unload', function() {// Make AJAX request})
 // window.addEventListener('beforeUnload', function() {// Make AJAX request})
@@ -15,26 +17,19 @@ export class ChatArea extends Component {
     super(props);
     this._wasPageCleanedUp = false;
   }  
-  logOutOnClose(){
-    if (!this._wasPageCleanedUp){
-      $.ajax({
-        type: 'POST',
-        async: false,
-        url: 'http://localhost:8080/auth/logout',
-        success: () =>  this._wasPageCleanedUp = true
-        });
-    }
-    }
+  //logout when user closes window but do not remove authtoken
+
   componentDidMount(){
-    // console.log(this.props.loggedIn);
+    const path = this.props.location.pathname;
+    this.props.dispatch(fetchMessages(path));
     this.interval = setInterval(() => {
-      // console.log('room id from chatarea:', this.props.roomId);
-      this.props.dispatch(fetchMessages({roomId: this.props.roomId}));
+      this.props.dispatch(fetchMessages());
     }, 1000 * 60)
-    
+
     //logout automatically if user closes window (don't remove authkey)
       window.onbeforeunload = function () {
-        this.logOutOnClose();
+        logOutOnClose(this._wasPageCleanedUp);
+        // this.props.dispatch(leaveRoom(this.props.userId));
    
    };
   };
@@ -52,9 +47,8 @@ export class ChatArea extends Component {
   //   );
 
   render() {
-
     //while null have loading 
-    if (this.props.users === null) {
+    if (!this.props.userId) {
       return <Redirect to="/" />;
     }
     const chatMessages = this.props.messages.map((message) => {
@@ -68,11 +62,19 @@ export class ChatArea extends Component {
       <Fragment>
         <div>
             Messages
+
           <ul style={{"listStyleType": "none"}}>
             {chatMessages}
           </ul>
+
           <Input /> 
+
         </div>
+
+        <div>
+          <LeaveChatRoom />
+        </div>
+        
         <div>
           <Logout /> 
         </div>
@@ -82,10 +84,11 @@ export class ChatArea extends Component {
 }
 
 const mapStatetoProps = (state) => {
+  console.log('the state is: ', state);
   return ({
     messages: state.chat.chatWindow,
-    users: state.auth.currentUser,
+    userId: state.auth.currentUser ? state.auth.currentUser.id : null,
     roomId: state.chatroom.roomId
   })
 }
-export default connect(mapStatetoProps)(ChatArea)
+export default withRouter(connect(mapStatetoProps)(ChatArea));
