@@ -115,7 +115,6 @@ export const leaveChatRoom = (history) => (dispatch, getState) => {
   dispatch(leaveChatRoomRequest());
   const authToken = getState().auth.authToken;
   const roomUrl = history.location.pathname;
-  console.log('room url is: ',roomUrl);
   const userId = getState().auth.currentUser.id;
   // console.log('the room id: ', roomId);
   return (

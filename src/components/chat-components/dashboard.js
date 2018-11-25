@@ -1,9 +1,9 @@
 import React,{Fragment, Component} from 'react';
 import {connect} from 'react-redux';
-import ActiveRooms from '../dashboard-components/active-rooms'
+import ActiveRooms from '../dashboard-components/active-rooms';
+import JoinRandomRoom from '../dashboard-components/join-random-room';
 import NewChatRoom from './newChatRoomBtn';
 import { logOutOnClose } from '../../utils';
-import { Redirect } from 'react-router-dom';
 // import {Link, Redirect} from 'react-router-dom';
 
 
@@ -22,6 +22,7 @@ export class Dashboard extends Component {
     return (
       <Fragment>
         <ActiveRooms />
+        <JoinRandomRoom />
         <h2>Do you want to start a chat?</h2>
         <NewChatRoom />
       </Fragment>

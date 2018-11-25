@@ -7,6 +7,7 @@ export const registerUser = user => dispatch => {
     return fetch(`${API_BASE_URL}/user`, {
         method: 'POST',
         headers: {
+            'Accept': 'application/json',
             'content-type': 'application/json'
         },
         body: JSON.stringify(user)

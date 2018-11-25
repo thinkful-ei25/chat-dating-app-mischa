@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages }  from '../../actions/chat';
 import LeaveChatRoom from './leaveRoom';
-import { logOutOnClose } from '../../utils'
+// import { logOutOnClose, leaveRoom } from '../../utils'
 // import {logout} from '../../actions/auth';
+import $ from 'jquery';
 import Input from './input';
 import Logout from './logout';
 import {Redirect, withRouter} from 'react-router-dom';
@@ -18,17 +19,38 @@ export class ChatArea extends Component {
     this._wasPageCleanedUp = false;
   }  
   //logout when user closes window but do not remove authtoken
+  leaveRoom(){
+    if (!this._wasPageCleanedUp){
+      $.ajax({
+        type: 'PUT',
+        async: false,
+        url: 'http://localhost:8080/api/leave-room',
+        success: () =>  this._wasPageCleanedUp = true
+        });
+    }
+    }
+    logOutOnClose(){
+      if (!this._wasPageCleanedUp){
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'http://localhost:8080/auth/logout',
+          success: () =>  this._wasPageCleanedUp = true
+          });
+      }
+      }
 
   componentDidMount(){
-    const path = this.props.location.pathname;
-    this.props.dispatch(fetchMessages(path));
+    const roomUrl = this.props.location.pathname;
+    this.props.dispatch(fetchMessages(roomUrl));
     this.interval = setInterval(() => {
       this.props.dispatch(fetchMessages());
     }, 1000 * 60)
 
     //logout automatically if user closes window (don't remove authkey)
       window.onbeforeunload = function () {
-        logOutOnClose(this._wasPageCleanedUp);
+        this.leaveRoom();
+        this.logOutOnClose();
         // this.props.dispatch(leaveRoom(this.props.userId));
    
    };
@@ -84,7 +106,6 @@ export class ChatArea extends Component {
 }
 
 const mapStatetoProps = (state) => {
-  console.log('the state is: ', state);
   return ({
     messages: state.chat.chatWindow,
     userId: state.auth.currentUser ? state.auth.currentUser.id : null,

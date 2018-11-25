@@ -20,7 +20,6 @@ export const fetchMessagesError = (err) => ({
 });
 
 export const fetchMessages = (path) => (dispatch, getState, location) => {
-  console.log(path);
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
   return (
@@ -32,7 +31,6 @@ export const fetchMessages = (path) => (dispatch, getState, location) => {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         const {id, users, url} = data;
         dispatch(fetchMessagesSuccess(data));
         dispatch(refreshChatroomState(id, users, url));
@@ -42,7 +40,6 @@ export const fetchMessages = (path) => (dispatch, getState, location) => {
 }
 
 export const postMessage = (messageData) => (dispatch, getState) => {
-  console.log(messageData);
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/api/chat-window`, {
       method: 'POST',

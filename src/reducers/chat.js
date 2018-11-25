@@ -11,7 +11,6 @@ const initialState={
 }
 
 function addUsernameToMessage(messageData){
-  console.log(messageData);
   const messages = messageData.messages.map((message) => {
         const userIdofMessage = message.user
           messageData.users.forEach((user) => {

@@ -28,9 +28,7 @@ export const getActiveRooms = () => (dispatch, getState) => {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         const url = response.result.map(item => item.url);
-        console.log(url);
         dispatch(getActiveRoomsSuccess(url));
         // history.push(url);
       })

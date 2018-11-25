@@ -49,6 +49,9 @@ function reducer(state=initialState, action) {
     case LEAVECHATROOMREQUEST: 
       return  {...state, loading: true}
     
+    case JOINCHATROOMFAILURE:
+      return {...state, loading: false, err: action.err}
+    
     case LEAVECHATROOMSUCCESS: 
       return {
         ...state, 

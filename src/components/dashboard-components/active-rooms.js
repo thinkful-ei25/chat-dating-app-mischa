@@ -1,16 +1,16 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+// import {Field, reduxForm, focus} from 'redux-form';
 import {getActiveRooms} from '../../actions/dashboard';
 import {joinRoom} from '../../actions/chat-room';
 import {connect} from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 export class ActiveRooms extends React.Component {
     componentDidMount(){
         this.props.dispatch(getActiveRooms());
     }
     onClickHandler(room){
-        console.log(this.props.history);
+
         
         return (
             this.props.dispatch(joinRoom(this.props.history, room))
@@ -28,7 +28,6 @@ export class ActiveRooms extends React.Component {
             </li>
             )
           })
-        console.log('props: ', this.props);
         return (
           <ul>
             {activeRooms}
