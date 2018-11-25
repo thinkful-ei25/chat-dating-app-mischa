@@ -3,7 +3,7 @@ import ChatArea from './chatArea';
 import Dashboard from './dashboard';
 import RegistrationPage from '../auth-components/registration-page';
 import LandingPage from '../auth-components/landingPage';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Redirect} from 'react-router-dom';
 
 
 
@@ -21,7 +21,7 @@ export class Chat extends Component {
   render() {
     return(
       <div style={divStyle}>
-       
+       <Redirect exact path="/chat-room/" to="/"/>
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/chat-area' component={ChatArea} />

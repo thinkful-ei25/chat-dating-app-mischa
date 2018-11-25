@@ -4,7 +4,7 @@ import ActiveRooms from '../dashboard-components/active-rooms';
 import JoinRandomRoom from '../dashboard-components/join-random-room';
 import NewChatRoom from './newChatRoomBtn';
 import { logOutOnClose } from '../../utils';
-// import {Link, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 export class Dashboard extends Component {
@@ -16,27 +16,30 @@ export class Dashboard extends Component {
   };
   
   render(){
-    // if (!this.props.loggedIn) {
-    //   return <Redirect to="/" />;
-    // }
-    return (
-      <Fragment>
-        <ActiveRooms />
-        <JoinRandomRoom />
-        <h2>Do you want to start a chat?</h2>
-        <NewChatRoom />
-      </Fragment>
-    )
-
+    console.log(this.props.loggedIn);
+    if (!this.props.loggedIn) {
+      this.props.history.push('/');
+      return null;
+    }else{
+      return (
+        <Fragment>
+          <ActiveRooms />
+          <JoinRandomRoom />
+          <h2>Do you want to start a chat?</h2>
+          <NewChatRoom />
+        </Fragment>
+      )
+    }
   }
-  }
+}
       
 
 const mapStateToProps = state => {
+  console.log(state);
     return ({
-      loggedIn: state.auth.username
+      loggedIn: state.auth.currentUser !== null
     })
   };
   
-  export default connect(mapStateToProps)(Dashboard);
+  export default withRouter(connect(mapStateToProps)(Dashboard));
   

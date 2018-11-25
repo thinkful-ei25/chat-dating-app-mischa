@@ -70,8 +70,9 @@ export class ChatArea extends Component {
 
   render() {
     //while null have loading 
-    if (!this.props.userId) {
-      return <Redirect to="/" />;
+    if (!this.props.loggedIn) {
+      this.props.history.push('/');
+      return null;
     }
     const chatMessages = this.props.messages.map((message) => {
       return (
@@ -108,7 +109,7 @@ export class ChatArea extends Component {
 const mapStatetoProps = (state) => {
   return ({
     messages: state.chat.chatWindow,
-    userId: state.auth.currentUser ? state.auth.currentUser.id : null,
+    loggedIn: state.auth.currentUser ? state.auth.currentUser.id : null,
     roomId: state.chatroom.roomId
   })
 }

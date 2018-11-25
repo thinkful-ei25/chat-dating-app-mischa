@@ -42,6 +42,10 @@ export const logoutWarning = warning => ({
     type: LOGOUT_WARNING,
     warning
 })
+// export const LOGOUTFRONTEND = 'LOGOUTFRONTEND';
+// export const logoutFrontEnd = () => ({
+//     type: LOGOUTFRONTEND
+// })
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
@@ -126,6 +130,7 @@ export const logout = () => (dispatch, getState) => {
         if (response.ok){
             clearAuthToken();
             dispatch(clearAuth());
+            // dispatch(logoutFrontEnd());
         }
        
     })

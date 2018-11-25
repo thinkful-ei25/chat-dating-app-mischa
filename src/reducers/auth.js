@@ -5,7 +5,8 @@ import {
     AUTH_SUCCESS,
     AUTH_ERROR,
     LOGOUT_WARNING,
-    STAY_LOGGEDIN
+    STAY_LOGGEDIN,
+    LOGOUTFRONTEND
 } from '../actions/auth';
 
 const initialState = {
@@ -51,6 +52,7 @@ export default function reducer(state = initialState, action) {
             ...state,
             logoutWarning: false
         })
-    }
+    } 
+    
     return state;
 }
