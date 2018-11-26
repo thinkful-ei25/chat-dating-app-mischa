@@ -6,7 +6,9 @@ import LeaveChatRoom from './leaveRoom';
 // import {logout} from '../../actions/auth';
 import $ from 'jquery';
 import Input from './input';
+import Send from './sendQuestion';
 import Logout from './logout';
+import Questions from './questions';
 import {Redirect, withRouter} from 'react-router-dom';
 
 //import jquery --> use .ajax methoed https://stackoverflow.com/questions/4945932/window-onbeforeunload-ajax-request-in-chrome/20322988#20322988
@@ -81,16 +83,28 @@ export class ChatArea extends Component {
       </li>
       )
     })
+    const questions = this.props.questions.map((question, idx) => {
+      return (
+      <li key={idx}>
+        <span>{question}</span>
+      </li>
+      )
+    })
     return(
       <Fragment>
+       
         <div>
-            Messages
-
           <ul style={{"listStyleType": "none"}}>
             {chatMessages}
           </ul>
-
-          <Input /> 
+          {
+            this.props.loggedIn === this.props.asker ? 
+            <div>
+              <h3>Ask a question!</h3>
+              <Questions /> <Send />
+            </div>
+            :<Input />
+          }
 
         </div>
 
@@ -110,7 +124,9 @@ const mapStatetoProps = (state) => {
   return ({
     messages: state.chat.chatWindow,
     loggedIn: state.auth.currentUser ? state.auth.currentUser.id : null,
-    roomId: state.chatroom.roomId
+    asker: state.chatroom.asker,
+    roomId: state.chatroom.roomId,
+    questions: state.chatroom.questions,
   })
 }
 export default withRouter(connect(mapStatetoProps)(ChatArea));

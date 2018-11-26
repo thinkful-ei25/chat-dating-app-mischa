@@ -23,8 +23,7 @@ export class ActiveRooms extends React.Component {
         const activeRooms = this.props.activeRooms.map((room, idx) => {
             return (
             <li key={idx}>
-                 <button onClick={()=>this.onClickHandler(room)}>{room}</button>
-              {/* <button onClick={() => this.onClickHandler(room)}>url: {room}</button> */}
+                 <button onClick={()=>this.onClickHandler(room.url)}>{room.url}</button>
             </li>
             )
           })
@@ -37,39 +36,7 @@ export class ActiveRooms extends React.Component {
 }
 const mapStatetoProps = (state) => {
     return {
-        activeRooms: state.dashboard ? state.dashboard.activeRooms : null
+        activeRooms: state.dashboard ? state.dashboard.activeRooms.filter(room => room.users.length < 2) : null
     };
 }
 export default withRouter(connect(mapStatetoProps)(ActiveRooms));
-// export default withRouter(connect(mapStatetoProps)(ChatArea));
-
-
-
-  // <div>
-
-           
-            // <h2>Do you want to join a chat?</h2>
-            // <form
-            //     className="login-form"
-            //     onSubmit={this.props.handleSubmit(values =>
-            //         this.onSubmit(values)
-            //     )}>
-            //     <label htmlFor="openRooms">Open Rooms</label>
-            //     <Field component={'select'} type="text" name="openRooms">
-            //         <option>1234</option>
-            //         <option>1234656</option>
-            //     </Field>
-            //     <button
-            //         type="submit"
-            //         disabled={this.props.pristine || this.props.submitting}>
-            //         Register
-            //     </button>
-            // </form>
-            // </div>
-
-
-// export default reduxForm({
-//     form: 'open-chat',
-//     onSubmitFail: (errors, dispatch) =>
-//         dispatch(focus('open-chat', Object.keys(errors)[0]))
-// })(ActiveRooms);

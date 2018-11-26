@@ -16,7 +16,6 @@ export class Dashboard extends Component {
   };
   
   render(){
-    console.log(this.props.loggedIn);
     if (!this.props.loggedIn) {
       this.props.history.push('/');
       return null;
@@ -35,7 +34,6 @@ export class Dashboard extends Component {
       
 
 const mapStateToProps = state => {
-  console.log(state);
     return ({
       loggedIn: state.auth.currentUser !== null
     })

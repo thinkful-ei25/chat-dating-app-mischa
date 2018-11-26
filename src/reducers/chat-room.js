@@ -4,7 +4,9 @@ import {
   LEAVECHATROOMREQUEST, LEAVECHATROOMSUCCESS, LEAVECHATROOMFAILURE,
   
   REFRESHCHATROOMSTATE,
-  DEACTIVATEROOM
+  DEACTIVATEROOM,
+
+  DISPLAYPREVIOUSNEXTQUESTION
 } 
 from '../actions/chat-room'
 
@@ -16,9 +18,11 @@ const initialState={
   users: [],
   roomUrl : null,
   roomId: null,
-  activeRoom: false
+  activeRoom: false,
+  questions: [],
+  questionNumberToDisplay: 0,
+  asker: null,
 }
-
 
 function reducer(state=initialState, action) {
   switch(action.type){
@@ -28,13 +32,16 @@ function reducer(state=initialState, action) {
 
     case NEWCHATROOMSUCCESS:
       return  {
+        ...state,
         loading: false,  
         users: [action.userId],
         /* chatWindow: action.messagesList, */  
         err: null,
         roomUrl: action.roomUrl,
         roomId: action.roomId,
-        activeRoom: true
+        questions: action.questions,
+        activeRoom: true,
+        asker: action.userId,
       }
 
     case NEWCHATROOMFAILURE: 
@@ -75,6 +82,9 @@ function reducer(state=initialState, action) {
      
     case DEACTIVATEROOM: 
        return arrayIsEmpty(state.users) ?  { ...state, activeRoom: false } : state
+
+    case DISPLAYPREVIOUSNEXTQUESTION:      
+        return ({...state, questionNumberToDisplay: action.questionNumberToDisplay})
 
     default: 
       return state;

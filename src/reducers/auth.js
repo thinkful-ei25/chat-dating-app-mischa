@@ -6,7 +6,6 @@ import {
     AUTH_ERROR,
     LOGOUT_WARNING,
     STAY_LOGGEDIN,
-    LOGOUTFRONTEND
 } from '../actions/auth';
 
 const initialState = {

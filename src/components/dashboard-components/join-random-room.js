@@ -5,11 +5,13 @@ import {withRouter} from 'react-router-dom';
 import {arrayIsEmpty} from '../../utils';
 export class JoinRandomRoom extends Component {
   onClickHandler(){
+
       const num = Math.floor(Math.random()*this.props.activeRooms.length);
       const roomUrl= this.props.activeRooms[num];
       this.props.dispatch(joinRoom(this.props.history, roomUrl));
   }
   render(){
+  
     if(arrayIsEmpty(this.props.activeRooms)){
       return (
         <h3>
@@ -25,7 +27,7 @@ export class JoinRandomRoom extends Component {
 }
 const mapStatetoProps = (state) => {
   return {
-      activeRooms: state.dashboard ? state.dashboard.activeRooms : null
+      activeRooms: state.dashboard ? state.dashboard.activeRooms.filter(room => room.users.length < 2) : null
   };
 }
 export default withRouter(connect(mapStatetoProps)(JoinRandomRoom));

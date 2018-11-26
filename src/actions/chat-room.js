@@ -6,11 +6,11 @@ export const NEWCHATROOMREQUEST = 'NEWCHATROOMREQUEST';
 export const newChatRoomRequest = () =>  ({type: NEWCHATROOMREQUEST});
 
 export const NEWCHATROOMSUCCESS = 'NEWCHATROOMSUCCESS';
-export const newChatRoomSuccess = (userId, roomUrl, roomId) =>  {
+export const newChatRoomSuccess = (userId, roomUrl, roomId, questions) =>  {
   return(
     {
       type: NEWCHATROOMSUCCESS,
-      userId, roomUrl, roomId
+      userId, roomUrl, roomId, questions
     }
   )
 };
@@ -65,6 +65,12 @@ export const leaveChatRoomFailure = (err) =>  (
 export const DEACTIVATEROOM = 'DEACTIVATEROOM';
 export const deactivateRoom = () => ({ type: DEACTIVATEROOM });
 
+export const DISPLAYPREVIOUSNEXTQUESTION = 'DISPLAYPREVIOUSNEXTQUESTION';
+export const displayPreviousNextQuestion = (questionNumberToDisplay) => ({
+  type: DISPLAYPREVIOUSNEXTQUESTION,
+  questionNumberToDisplay
+})
+
 export const startChatRoom = (history) => (dispatch, getState) => {
   dispatch(newChatRoomRequest());
   const authToken = getState().auth.authToken;
@@ -79,9 +85,9 @@ export const startChatRoom = (history) => (dispatch, getState) => {
         return response.json();
       })
       .then((response) => {
-        const {url, id} = response;
-        // console.log(url);
-        dispatch(newChatRoomSuccess(userId, url, id));
+        const {url, id, questions: questionsObj} = response;
+        const {questions} = questionsObj;
+        dispatch(newChatRoomSuccess(userId, url, id, questions));
         history.push(url);
       })
         .catch(err => dispatch(newChatRoomFailure(err)))

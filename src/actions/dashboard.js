@@ -28,8 +28,13 @@ export const getActiveRooms = () => (dispatch, getState) => {
         return response.json();
       })
       .then((response) => {
-        const url = response.result.map(item => item.url);
-        dispatch(getActiveRoomsSuccess(url));
+        const activeRooms = response.result.map(item => 
+         ({ 
+            url: item.url,
+            users: item.users
+          })
+          );
+        dispatch(getActiveRoomsSuccess(activeRooms));
         // history.push(url);
       })
         .catch(err => dispatch(getActiveRoomsFailure(err)))

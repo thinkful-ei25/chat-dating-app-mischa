@@ -19,6 +19,7 @@ export const fetchMessagesError = (err) => ({
   err
 });
 
+
 export const fetchMessages = (path) => (dispatch, getState, location) => {
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
