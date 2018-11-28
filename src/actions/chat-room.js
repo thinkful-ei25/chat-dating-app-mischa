@@ -95,7 +95,8 @@ export const startChatRoom = (history) => (dispatch, getState) => {
         // questions = shuffle(questions);
         // console.log('questions after shuffle', questions);
         dispatch(newChatRoomSuccess(userId, url, id, questions));
-        history.push(url);
+        // history.push(url);
+        return url;
       })
         .catch(err => dispatch(newChatRoomFailure(err)))
   )
