@@ -98,7 +98,10 @@ export const startChatRoom = (history) => (dispatch, getState) => {
         // history.push(url);
         return url;
       })
-        .catch(err => dispatch(newChatRoomFailure(err)))
+        .catch(err => {
+          console.log(err);
+          dispatch(newChatRoomFailure(err));
+        })
   )
 }
 
