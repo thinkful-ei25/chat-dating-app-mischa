@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ChatArea from './chatArea';
 import Dashboard from './dashboard';
 import RegistrationPage from '../auth-components/registration-page';
-import LoginForm from '../auth-components/login-form';
+import LoginPage from '../auth-components/login-page';
 import LandingPage from '../auth-components/landingPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
 import '../../css/chat-date.css';
@@ -26,7 +26,7 @@ export class Chat extends Component {
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/chat-area' component={ChatArea} />
-        <Route exact path='/login' component={LoginForm} />
+        <Route exact path='/login' component={LoginPage} />
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/chat-room/:newRoom" component={ChatArea} />
       </div>

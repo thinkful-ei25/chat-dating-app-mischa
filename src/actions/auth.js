@@ -90,17 +90,7 @@ export const login = (username, password) => dispatch => {
             })
     );
 };
-export const stillActive = () => (dispatch, getState) => {
-    const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/auth/active-user`, {
-        method: 'GET',
-        headers: {
-            // Provide our existing token as credentials to get a new one
-            Authorization: `Bearer ${authToken}`,
-            active: true
-        }
-    })
-}
+
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());

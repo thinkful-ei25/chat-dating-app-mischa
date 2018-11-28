@@ -2,15 +2,12 @@ import React,{Component, /* Fragment */} from 'react';
 import {connect} from 'react-redux';
 // import {withRouter} from 'react-router-dom';
 import {displayPreviousNextQuestion} from '../../actions/chat-room';
-
+import {mod} from '../../utils';
 // import Back from './backBtn'
 
 export class PreviousNextBtn extends Component {
   
-  //from https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e
-  mod(x, n) {
-    return (x % n + n) % n  
-  }
+
   //show previous question or next
   onClickHandler(){
     if(this.props.prevNext === 'next'){

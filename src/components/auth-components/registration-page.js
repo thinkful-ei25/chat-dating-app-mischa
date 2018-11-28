@@ -8,13 +8,13 @@ export function RegistrationPage(props) {
     // If we are logged in (which happens automatically when registration
     // is successful) redirect to the user's dashboard
     if (props.loggedIn) {
-        return <Redirect to="/chat-area" />;
+        return <Redirect to="/" />;
     }
     return (
         <div className="home">
             <h2>Register To Date and Chat!</h2>
             <RegistrationForm />
-            <Link to="/">Login</Link>
+            <Link to="/login">Login</Link>
         </div>
     );
 }

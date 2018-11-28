@@ -6,6 +6,10 @@ export function arrayIsEmpty(arr) {
   }else {
     return false;
   }
+}  
+//from https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e
+export function mod(x, n) {
+  return (x % n + n) % n  
 }
 
 //from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
