@@ -20,40 +20,45 @@ export const fetchMessagesError = (err) => ({
 });
 
 
-export const fetchMessages = (path) => (dispatch, getState, location) => {
+
+export const fetchMessages = (url) => (dispatch, getState) => {
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
   return (
       fetch(`${API_BASE_URL}/api/chat-window/`, {
         method: 'GET',
-        headers: {Authorization: `Bearer ${authToken}`, path}
+        headers: {Authorization: `Bearer ${authToken}`, url}
       })
       .then(response => {
         return response.json();
       })
       .then(data => {
-        const {id, users, url} = data;
+        const {id, users, url, active} = data;
         dispatch(fetchMessagesSuccess(data));
-        dispatch(refreshChatroomState(id, users, url));
+        dispatch(refreshChatroomState(id, users, url, active));
       })
         .catch(err => dispatch(fetchMessagesError(err)))
   )
 }
 
-export const postMessage = (messageData) => (dispatch, getState) => {
+export const postMessage = (messageData, url) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
+
   return fetch(`${API_BASE_URL}/api/chat-window`, {
       method: 'POST',
       headers: {
           'content-type': 'application/json',
           'Authorization': `Bearer ${authToken}`,
+           url,
       },
       body: JSON.stringify(messageData)
       // body: 'message'
   })
       .then(res => {
-        // res.json();
-        dispatch(fetchMessages(messageData.path));
+        return res.json();
+      })
+      .then(res => {
+        dispatch(fetchMessages(url));
       })
       .catch(err => {
           const {reason} = err;

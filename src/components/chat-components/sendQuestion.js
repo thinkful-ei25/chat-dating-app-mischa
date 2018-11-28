@@ -1,16 +1,21 @@
-import React,{Component, /* Fragment */} from 'react';
+import React,{Component} from 'react';
 import {connect} from 'react-redux';
-// import {withRouter} from 'react-router-dom';
-import {displayPreviousNextQuestion} from '../../actions/chat-room';
+import {postMessage}  from '../../actions/chat';
+import {withRouter} from 'react-router-dom';
+
 
 // import Back from './backBtn'
 
-export class PreviousNextBtn extends Component {
+export class sendQuestion extends Component {
   
   onClickHandler(){
-    
-  }
-
+    const question = this.props.questions[this.props.questionNumberToDisplay]
+    const url = this.props.location.pathname
+    this.props.dispatch(postMessage({
+        message: question
+      }, url)
+      )
+    }
   render(){
     return (
       <button onClick={()=> this.onClickHandler()}>Send Question!</button>
@@ -26,5 +31,5 @@ const mapStateToProps = (state => {
 })
 
 
-export default connect(mapStateToProps)(PreviousNextBtn);
+export default withRouter(connect(mapStateToProps)(sendQuestion));
 

@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom';
 export class Input extends Component {
 
   render() {
+    const roomUrl = this.props.location.pathname;
     return(
       <form onSubmit={
 
@@ -17,9 +18,8 @@ export class Input extends Component {
               userId: this.props.userId,
               roomId: this.props.roomId,
               message: this.chat.value,
-              path: this.props.location.pathname
-            }
-            ));
+            },roomUrl)
+            );
           this.chat.value = '';
         }
       }>

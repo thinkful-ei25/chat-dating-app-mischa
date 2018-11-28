@@ -8,6 +8,7 @@ export class Questions extends Component {
 
   
   render(){
+    console.log('questions props: ', this.props);
     return (
       <Fragment>
         <div>
@@ -21,7 +22,6 @@ export class Questions extends Component {
   }
 }
 const mapStateToProps = (state => {
-  console.log(state);
   return ({
     questions: state.chatroom.questions,
     questionNumberToDisplay: state.chatroom.questionNumberToDisplay

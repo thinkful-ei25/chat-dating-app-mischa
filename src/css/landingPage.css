@@ -1,0 +1,20 @@
+.title{
+  text-align: center
+}
+
+.register-btn{
+  border-radius: 5px;
+}
+
+.description{
+  width: 75%;
+  margin: 0 auto 15px auto;
+}
+
+.content{
+  text-align: justify;
+}
+
+.auth-btn{
+  text-align: center;
+}

@@ -2,18 +2,18 @@ import {
   NEWCHATROOMREQUEST, NEWCHATROOMSUCCESS, NEWCHATROOMFAILURE, 
   JOINCHATROOMREQUEST, JOINCHATROOMSUCCESS, JOINCHATROOMFAILURE,
   LEAVECHATROOMREQUEST, LEAVECHATROOMSUCCESS, LEAVECHATROOMFAILURE,
-  
   REFRESHCHATROOMSTATE,
   DEACTIVATEROOM,
 
   DISPLAYPREVIOUSNEXTQUESTION
 } 
 from '../actions/chat-room'
-
-import { arrayIsEmpty } from '../utils';
+import { arrayIsEmpty, shuffle } from '../utils';
 
 const initialState={
   loading: false,
+  joinChatLoading: false,
+  leaveChatLoading: false,
   err: null,
   users: [],
   roomUrl : null,
@@ -21,7 +21,7 @@ const initialState={
   activeRoom: false,
   questions: [],
   questionNumberToDisplay: 0,
-  asker: null,
+  waitingForPartner: false
 }
 
 function reducer(state=initialState, action) {
@@ -39,25 +39,31 @@ function reducer(state=initialState, action) {
         err: null,
         roomUrl: action.roomUrl,
         roomId: action.roomId,
-        questions: action.questions,
+        questions: shuffle(action.questions),
         activeRoom: true,
         asker: action.userId,
+        waitingForPartner: true
       }
 
     case NEWCHATROOMFAILURE: 
       return {...state, loading: false, err: action.err}
     
     case JOINCHATROOMREQUEST: 
-      return {...state, loading: true}
+      return {...state, joinChatLoading: true}
     
     case JOINCHATROOMSUCCESS:
-      return {...state, loading: false, users: [...state.users, action.userId]}
+      return {...state, 
+        joinChatLoading: false, 
+        users: [...state.users, action.userId],
+        waitingForPartner: false,
+        questions: shuffle(action.questions)
+      }
     
     case LEAVECHATROOMREQUEST: 
-      return  {...state, loading: true}
+      return  {...state, leaveChatLoading: true}
     
     case JOINCHATROOMFAILURE:
-      return {...state, loading: false, err: action.err}
+      return {...state, leaveChatLoading: false, err: action.err}
     
     case LEAVECHATROOMSUCCESS: 
       return {
@@ -65,7 +71,10 @@ function reducer(state=initialState, action) {
         loading: false, 
         users: state.users.filter((userId) => (userId !== action.userId)),
         roomUrl: null,
-        roomId: null
+        roomId: null,
+        active: false,
+        leaveChatLoading: false,
+        questions:[]
       }
 
     case LEAVECHATROOMFAILURE: 
@@ -77,9 +86,9 @@ function reducer(state=initialState, action) {
          users: action.users,
          roomUrl : action.roomUrl,
          roomId: action.roomId,
-         activeRoom: true
+         activeRoom: action.active,
         }
-     
+
     case DEACTIVATEROOM: 
        return arrayIsEmpty(state.users) ?  { ...state, activeRoom: false } : state
 

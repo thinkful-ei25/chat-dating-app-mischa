@@ -42,10 +42,7 @@ export const logoutWarning = warning => ({
     type: LOGOUT_WARNING,
     warning
 })
-// export const LOGOUTFRONTEND = 'LOGOUTFRONTEND';
-// export const logoutFrontEnd = () => ({
-//     type: LOGOUTFRONTEND
-// })
+
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
@@ -93,6 +90,17 @@ export const login = (username, password) => dispatch => {
             })
     );
 };
+export const stillActive = () => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/auth/active-user`, {
+        method: 'GET',
+        headers: {
+            // Provide our existing token as credentials to get a new one
+            Authorization: `Bearer ${authToken}`,
+            active: true
+        }
+    })
+}
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
@@ -116,18 +124,19 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
-
-export const logout = () => (dispatch, getState) => {
+//change 
+export const logout = (tabClosed = false) => (dispatch, getState) => {
   const authToken = getState().auth.authToken; 
   return fetch(`${API_BASE_URL}/auth/logout`, {
     method: 'GET',
     headers: {
       // Send authToken to logout with
+
       Authorization: `Bearer ${authToken}`
     }
   })
     .then((response) => {
-        if (response.ok){
+        if (response.ok && !tabClosed){
             clearAuthToken();
             dispatch(clearAuth());
             // dispatch(logoutFrontEnd());

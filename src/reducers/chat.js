@@ -4,24 +4,13 @@ import {
   FETCHMESSAGESERROR
 } 
 from '../actions/chat'
+import {addUsernameToMessage} from '../utils';
 const initialState={
   chatWindow : [],
   loading: false,
   err: null
 }
 
-function addUsernameToMessage(messageData){
-  const messages = messageData.messages.map((message) => {
-        const userIdofMessage = message.user
-          messageData.users.forEach((user) => {
-            if (user.id === userIdofMessage) {
-              message.userName = user.username;
-            }
-        })
-        return message;
-  });
-  return messages;
-}
 
 function reducer(state=initialState, action) {
   switch(action.type){

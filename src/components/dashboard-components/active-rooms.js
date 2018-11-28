@@ -8,14 +8,14 @@ import {withRouter} from 'react-router-dom';
 export class ActiveRooms extends React.Component {
     componentDidMount(){
         this.props.dispatch(getActiveRooms());
+        this.interval = setInterval(() => {
+            this.props.dispatch(getActiveRooms());
+        }, 10 * 60)    
     }
     onClickHandler(room){
-
-        
         return (
             this.props.dispatch(joinRoom(this.props.history, room))
         )
-        
     }
     
 

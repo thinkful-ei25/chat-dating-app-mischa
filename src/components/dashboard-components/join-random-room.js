@@ -7,8 +7,10 @@ export class JoinRandomRoom extends Component {
   onClickHandler(){
 
       const num = Math.floor(Math.random()*this.props.activeRooms.length);
-      const roomUrl= this.props.activeRooms[num];
-      this.props.dispatch(joinRoom(this.props.history, roomUrl));
+      const {url} = this.props.activeRooms[num];
+
+      // const {url} = roomUrl;
+      this.props.dispatch(joinRoom(this.props.history, url));
   }
   render(){
   

@@ -2,14 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages }  from '../../actions/chat';
 import LeaveChatRoom from './leaveRoom';
-// import { logOutOnClose, leaveRoom } from '../../utils'
-// import {logout} from '../../actions/auth';
-import $ from 'jquery';
+import {logout}  from '../../actions/auth';
+import {leaveChatRoom} from '../../actions/chat-room';
+import Beforeunload from 'react-beforeunload';
+import {stillActive} from '../../actions/auth';
 import Input from './input';
 import Send from './sendQuestion';
 import Logout from './logout';
 import Questions from './questions';
-import {Redirect, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {API_BASE_URL} from '../../config';
+import $ from 'jquery';
 
 //import jquery --> use .ajax methoed https://stackoverflow.com/questions/4945932/window-onbeforeunload-ajax-request-in-chrome/20322988#20322988
 //window.addEventListener('unload', function() {// Make AJAX request})
@@ -20,58 +23,57 @@ export class ChatArea extends Component {
     super(props);
     this._wasPageCleanedUp = false;
   }  
-  //logout when user closes window but do not remove authtoken
-  leaveRoom(){
-    if (!this._wasPageCleanedUp){
-      $.ajax({
-        type: 'PUT',
+
+  onUnload() {
+    
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8080/api/chat-room/leave-room",
+        headers: {url: this.props.url, Authorization: `Bearer ${this.props.jwt}` },
         async: false,
-        url: 'http://localhost:8080/api/leave-room',
-        success: () =>  this._wasPageCleanedUp = true
-        });
-    }
-    }
-    logOutOnClose(){
-      if (!this._wasPageCleanedUp){
-        $.ajax({
-          type: 'POST',
-          async: false,
-          url: 'http://localhost:8080/auth/logout',
-          success: () =>  this._wasPageCleanedUp = true
-          });
-      }
-      }
+        
+    });
+}
 
   componentDidMount(){
     const roomUrl = this.props.location.pathname;
     this.props.dispatch(fetchMessages(roomUrl));
     this.interval = setInterval(() => {
-      this.props.dispatch(fetchMessages());
-    }, 1000 * 60)
+      this.props.dispatch(fetchMessages(roomUrl));
+    }, 10 * 60)    
+    window.onbeforeunload = this.onUnload.bind(this);
+  }
 
-    //logout automatically if user closes window (don't remove authkey)
-      window.onbeforeunload = function () {
-        this.leaveRoom();
-        this.logOutOnClose();
-        // this.props.dispatch(leaveRoom(this.props.userId));
-   
-   };
-  };
 
   //stop pigging db on sign out
   componentWillUnmount(){
     clearInterval(this.interval);
-    // this.props.dispatch(logout());
   }
 
-  // startPeriodicRefresh() {
-  //   setInterval(
-  //       () => this.props.dispatch(fetchMessages()),
-  //       1000
-  //   );
+  renderComponents(){
+    const isActive = this.props.active;
+    const numberOfUsers = this.props.users.length;
 
+      if ((numberOfUsers === 1) && isActive){
+        return (
+          <div>just waiting for someone to join!</div>
+        )
+      }else if((numberOfUsers === 1) && !isActive){
+          return (
+            <div>Oh no! User left!</div>
+          )
+      }else if ((numberOfUsers === 2) && isActive){
+        return(
+          <Fragment>
+            <Questions /> <Send /> 
+            
+            <Input />    
+          </Fragment>
+          
+        )
+      }    
+  }
   render() {
-    //while null have loading 
     if (!this.props.loggedIn) {
       this.props.history.push('/');
       return null;
@@ -83,28 +85,30 @@ export class ChatArea extends Component {
       </li>
       )
     })
-    const questions = this.props.questions.map((question, idx) => {
+
+    const users = this.props.usersInRoom.map((user, idx) => {
       return (
-      <li key={idx}>
-        <span>{question}</span>
-      </li>
+        <li key={idx}>
+          {user.username}
+        </li>
       )
     })
     return(
       <Fragment>
-       
         <div>
+         <ul style={{"listStyleType": "none"}}>
+          {this.props.users.length > 1 ? 'users': 'user'} : {users}
+         </ul>
+
           <ul style={{"listStyleType": "none"}}>
             {chatMessages}
           </ul>
-          {
-            this.props.loggedIn === this.props.asker ? 
-            <div>
-              <h3>Ask a question!</h3>
-              <Questions /> <Send />
-            </div>
-            :<Input />
-          }
+
+          {/* if active but one user then show -- waiting for user 
+            if active and two users then we're gold! let's chat
+            if not ative and one user then turn off chat 
+          */}
+          {this.renderComponents()}
 
         </div>
 
@@ -122,11 +126,17 @@ export class ChatArea extends Component {
 
 const mapStatetoProps = (state) => {
   return ({
+
     messages: state.chat.chatWindow,
-    loggedIn: state.auth.currentUser ? state.auth.currentUser.id : null,
+    loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
+    usersInRoom: state.chatroom.users,
+    jwt: state.auth.authToken,
     asker: state.chatroom.asker,
     roomId: state.chatroom.roomId,
+    url: state.chatroom.roomUrl,
     questions: state.chatroom.questions,
+    users: state.chatroom.users,
+    active: state.chatroom.activeRoom
   })
 }
 export default withRouter(connect(mapStatetoProps)(ChatArea));

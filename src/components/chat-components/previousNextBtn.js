@@ -36,7 +36,6 @@ const mapStateToProps = (state => {
     questions: state.chatroom.questions,
     questionNumberToDisplay: state.chatroom.questionNumberToDisplay
   })
-  
 })
 
 

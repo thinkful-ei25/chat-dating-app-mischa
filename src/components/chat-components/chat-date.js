@@ -2,29 +2,31 @@ import React, {Component} from 'react';
 import ChatArea from './chatArea';
 import Dashboard from './dashboard';
 import RegistrationPage from '../auth-components/registration-page';
+import LoginForm from '../auth-components/login-form';
 import LandingPage from '../auth-components/landingPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
+import '../../css/chat-date.css';
 
 
 
 import {connect} from 'react-redux';
 
-const divStyle = {
-  boxSizing: "border-box",
-  border: "1px solid #000",
-  color: "blue",
-  margin: '30px auto auto auto',
-  width: '50%'
 
-}
+
+//componentdidmount()
+// dispatch(stillLoggedIn())
+//in the server -- have interval if something's not there update database to false
+//look into react websockets -- 
 export class Chat extends Component {
+  
   render() {
     return(
-      <div style={divStyle}>
-       <Redirect exact path="/chat-room/" to="/"/>
+      <div className="container box">
+        <Redirect exact path="/chat-room/" to="/"/>
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/chat-area' component={ChatArea} />
+        <Route exact path='/login' component={LoginForm} />
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/chat-room/:newRoom" component={ChatArea} />
       </div>
@@ -32,5 +34,11 @@ export class Chat extends Component {
     )
   }
 }
-
-export default withRouter(connect()(Chat));
+const mapStateToProps = (state) => 
+{
+  return ({
+  loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
+  inChatroom: state.chatRoom ? 
+    state.chatRoom.users.filter(user => user.id === state.auth.currentUser.id) : null
+})}
+export default withRouter(connect(mapStateToProps)(Chat));

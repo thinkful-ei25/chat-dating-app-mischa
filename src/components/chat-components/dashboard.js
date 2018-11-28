@@ -3,18 +3,23 @@ import {connect} from 'react-redux';
 import ActiveRooms from '../dashboard-components/active-rooms';
 import JoinRandomRoom from '../dashboard-components/join-random-room';
 import NewChatRoom from './newChatRoomBtn';
-import { logOutOnClose } from '../../utils';
+import {stillActive}  from '../../actions/auth';
 import {withRouter} from 'react-router-dom';
-
+import Logout from './logout';
+// import openSocket from 'socket.io-client';
+// const socket = openSocket('http://localhost:8000');
+// console.log(socket);
+// function subscribeToTimer(cb) {
+//   socket.on('timer', timestamp => cb(null, timestamp));
+//   socket.emit('subscribeToTimer', 1000);
+// }
 
 export class Dashboard extends Component {
   componentDidMount(){
-    //logout automatically if user closes window (don't remove authkey)
-    window.onbeforeunload = function () {
-      logOutOnClose(this._wasPageCleanedUp);   
-   };
+    // setInterval(() => {
+    //   this.props.dispatch(stillActive());
+    // }, 1000 * 3)    
   };
-  
   render(){
     if (!this.props.loggedIn) {
       this.props.history.push('/');
@@ -26,6 +31,7 @@ export class Dashboard extends Component {
           <JoinRandomRoom />
           <h2>Do you want to start a chat?</h2>
           <NewChatRoom />
+          <Logout /> 
         </Fragment>
       )
     }

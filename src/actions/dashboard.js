@@ -19,7 +19,7 @@ export const getActiveRooms = () => (dispatch, getState) => {
   dispatch(getActiveRoomsRequest());
   const authToken = getState().auth.authToken;
   return (
-      fetch(`${API_BASE_URL}/api/chat-rooms-list`, {
+      fetch(`${API_BASE_URL}/api/chat-room/list`, {
         method: 'GET',
         headers: {Authorization: `Bearer ${authToken}`}
       })
