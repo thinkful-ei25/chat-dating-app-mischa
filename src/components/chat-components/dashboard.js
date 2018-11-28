@@ -3,16 +3,8 @@ import {connect} from 'react-redux';
 import ActiveRooms from '../dashboard-components/active-rooms';
 import JoinRandomRoom from '../dashboard-components/join-random-room';
 import NewChatRoom from './newChatRoomBtn';
-import {stillActive}  from '../../actions/auth';
 import {withRouter} from 'react-router-dom';
 import Logout from './logout';
-// import openSocket from 'socket.io-client';
-// const socket = openSocket('http://localhost:8000');
-// console.log(socket);
-// function subscribeToTimer(cb) {
-//   socket.on('timer', timestamp => cb(null, timestamp));
-//   socket.emit('subscribeToTimer', 1000);
-// }
 
 export class Dashboard extends Component {
   componentDidMount(){

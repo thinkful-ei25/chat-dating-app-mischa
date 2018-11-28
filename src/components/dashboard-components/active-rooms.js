@@ -12,6 +12,9 @@ export class ActiveRooms extends React.Component {
             this.props.dispatch(getActiveRooms());
         }, 10 * 60)    
     }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
     onClickHandler(room){
         return (
             this.props.dispatch(joinRoom(this.props.history, room))
