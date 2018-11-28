@@ -15,7 +15,7 @@ export class PreviousNextBtn extends Component {
       this.props.dispatch(displayPreviousNextQuestion(questionNumberToDisplay))
     }else{
       let questionNumberToDisplay = (this.props.questionNumberToDisplay - 1 );
-      questionNumberToDisplay = this.mod(questionNumberToDisplay, this.props.questions.length)
+      questionNumberToDisplay = mod(questionNumberToDisplay, this.props.questions.length)
       this.props.dispatch(displayPreviousNextQuestion(questionNumberToDisplay))
     }
     

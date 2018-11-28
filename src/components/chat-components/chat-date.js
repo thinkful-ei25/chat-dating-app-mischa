@@ -11,12 +11,6 @@ import '../../css/chat-date.css';
 
 import {connect} from 'react-redux';
 
-
-
-//componentdidmount()
-// dispatch(stillLoggedIn())
-//in the server -- have interval if something's not there update database to false
-//look into react websockets -- 
 export class Chat extends Component {
   
   render() {

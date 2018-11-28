@@ -1,9 +1,16 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import {getActiveRooms} from '../../actions/dashboard';
 import {joinRoom} from '../../actions/chat-room';
 import {withRouter} from 'react-router-dom';
 import {arrayIsEmpty} from '../../utils';
 export class JoinRandomRoom extends Component {
+  componentDidMount(){
+    this.props.dispatch(getActiveRooms());
+    this.interval = setInterval(() => {
+        this.props.dispatch(getActiveRooms());
+    }, 10 * 60)    
+}
   onClickHandler(){
 
       const num = Math.floor(Math.random()*this.props.activeRooms.length);

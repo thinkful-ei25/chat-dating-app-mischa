@@ -12,6 +12,7 @@ import Logout from './logout';
 import Questions from './questions';
 import {withRouter} from 'react-router-dom';
 import {API_BASE_URL} from '../../config';
+import '../../css/chatArea.css'
 import $ from 'jquery';
 
 //import jquery --> use .ajax methoed https://stackoverflow.com/questions/4945932/window-onbeforeunload-ajax-request-in-chrome/20322988#20322988
@@ -81,7 +82,8 @@ export class ChatArea extends Component {
     const chatMessages = this.props.messages.map((message) => {
       return (
       <li key={message.id}>
-        <span>{message.userName}: {message.message}</span>
+        <span>{message.userName}:</span> 
+        <span>{message.message}</span>
       </li>
       )
     })
@@ -96,14 +98,20 @@ export class ChatArea extends Component {
     return(
       <Fragment>
         <div>
-         <ul style={{"listStyleType": "none"}}>
-          {this.props.users.length > 1 ? 'users': 'user'} : {users}
-         </ul>
+          <section className="users">
+            <ul >
+              {this.props.users.length > 1 ? 'users': 'user'} : {users}
+            </ul>
+         </section>
+         <section className="chat-area">
+            <ul className="messages">
+              {chatMessages}
+            </ul>
 
-          <ul style={{"listStyleType": "none"}}>
-            {chatMessages}
-          </ul>
-
+         
+         </section>
+         
+         
           {/* if active but one user then show -- waiting for user 
             if active and two users then we're gold! let's chat
             if not ative and one user then turn off chat 

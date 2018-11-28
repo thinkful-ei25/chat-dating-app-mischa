@@ -1,0 +1,11 @@
+.chat-area{
+  height: 300px;
+  overflow: auto;
+  border: 1px solid grey;
+  margin: 0;
+}
+
+ul{
+  list-style-type: none;
+  
+}

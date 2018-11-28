@@ -22,9 +22,12 @@ export function LandingPage(props) {
                 and until we implement more feauters, you'll never have (or be able) to talk to the same person twice!
             </p>
             </article>
-            <Link to="/login" className="button auth-btn">Login</Link>
-            <span>OR</span>
-            <Link to="/register" className="button auth-btn">Register</Link>
+            <div className="auth-butn-container">
+                <Link to="/login" className="button auth-btn">Login</Link>
+                <span>OR</span>
+                <Link to="/register" className="button auth-btn">Register</Link>
+            </div>
+           
         </div>
     );
 }

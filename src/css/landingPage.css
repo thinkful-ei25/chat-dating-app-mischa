@@ -14,7 +14,13 @@
 .content{
   text-align: justify;
 }
+.auth-butn-container{
+  width: 100%;
+  display: table;
+  text-align: center;
+}
 
 .auth-btn{
-  text-align: center;
+  display: inline-block;
+  margin: 0 10px;
 }

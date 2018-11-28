@@ -14,7 +14,7 @@ export function LoginPage(props) {
         <div className="home">
             <h2>Login! To Date and Chat!</h2>
             <LoginForm />
-            OR! <Link to="/register">Register</Link>
+          
         </div>
     );
 }

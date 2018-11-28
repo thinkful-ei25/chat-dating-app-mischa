@@ -19,7 +19,7 @@ export class Dashboard extends Component {
     }else{
       return (
         <Fragment>
-          <ActiveRooms />
+          {/* <ActiveRooms /> */}
           <JoinRandomRoom />
           <h2>Do you want to start a chat?</h2>
           <NewChatRoom />

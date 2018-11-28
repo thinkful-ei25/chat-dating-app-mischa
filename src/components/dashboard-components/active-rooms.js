@@ -1,5 +1,4 @@
 import React from 'react';
-// import {Field, reduxForm, focus} from 'redux-form';
 import {getActiveRooms} from '../../actions/dashboard';
 import {joinRoom} from '../../actions/chat-room';
 import {connect} from 'react-redux';
@@ -23,17 +22,18 @@ export class ActiveRooms extends React.Component {
     
 
     render() {
-        const activeRooms = this.props.activeRooms.map((room, idx) => {
-            return (
-            <li key={idx}>
-                 <button onClick={()=>this.onClickHandler(room.url)}>{room.url}</button>
-            </li>
-            )
-          })
+        // const activeRooms = this.props.activeRooms.map((room, idx) => {
+        //     return (
+        //     <li key={idx}>
+        //          <button onClick={()=>this.onClickHandler(room.url)}>{room.url}</button>
+        //     </li>
+        //     )
+        //   })
         return (
-          <ul>
-            {activeRooms}
-          </ul>
+            null
+        //   <ul>
+        //     {activeRooms}
+        //   </ul>
         )
     }
 }
