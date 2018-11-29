@@ -23,7 +23,7 @@ export class NewChatRoom extends Component {
      return <Redirect to={this.state.chatRoomUrl}/>
     }
     return (
-      <button onClick={()=>this.onClickHandler()}>Open Room</button>
+      <button className="button open-room" onClick={()=>this.onClickHandler()}>Open Room</button>
     )
   }
 }

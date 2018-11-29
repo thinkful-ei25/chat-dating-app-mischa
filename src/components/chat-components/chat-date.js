@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import ChatArea from './chatArea';
 import Dashboard from './dashboard';
+import NavBar from '../auth-components/nav-bar';
 import RegistrationPage from '../auth-components/registration-page';
 import LoginPage from '../auth-components/login-page';
 import LandingPage from '../auth-components/landingPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
 import '../../css/chat-date.css';
-
-
 
 import {connect} from 'react-redux';
 
@@ -16,7 +15,12 @@ export class Chat extends Component {
   render() {
     return(
       <div className="container box">
+      <div className="background-image">
+        
+      </div>
+        {/* <img src='http://i66.tinypic.com/2vuzllc.jpg' alt="flamingo wallpaper"/> */}
         <Redirect exact path="/chat-room/" to="/"/>
+        <NavBar />
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/chat-area' component={ChatArea} />

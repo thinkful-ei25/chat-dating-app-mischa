@@ -16,6 +16,7 @@ const initialState={
   leaveChatLoading: false,
   err: null,
   users: [],
+  activeUsers: [],
   roomUrl : null,
   roomId: null,
   activeRoom: false,
@@ -35,6 +36,7 @@ function reducer(state=initialState, action) {
         ...state,
         loading: false,  
         users: [action.userId],
+        activeUsers: [action.userId],
         /* chatWindow: action.messagesList, */  
         err: null,
         roomUrl: action.roomUrl,
@@ -55,6 +57,7 @@ function reducer(state=initialState, action) {
       return {...state, 
         joinChatLoading: false, 
         users: [...state.users, action.userId],
+        activeUsers: [...state.users, action.userId],
         waitingForPartner: false,
         questions: shuffle(action.questions)
       }
@@ -69,7 +72,7 @@ function reducer(state=initialState, action) {
       return {
         ...state, 
         loading: false, 
-        users: state.users.filter((userId) => (userId !== action.userId)),
+        activeUsers: state.users.filter((userId) => (userId !== action.userId)),
         roomUrl: null,
         roomId: null,
         active: false,
@@ -84,13 +87,14 @@ function reducer(state=initialState, action) {
        return {
          ...state,
          users: action.users,
+         activeUsers: action.users,
          roomUrl : action.roomUrl,
          roomId: action.roomId,
          activeRoom: action.active,
         }
 
     case DEACTIVATEROOM: 
-       return arrayIsEmpty(state.users) ?  { ...state, activeRoom: false } : state
+       return arrayIsEmpty(state.users) ?  { ...state, activeRoom: false} : state
 
     case DISPLAYPREVIOUSNEXTQUESTION:      
         return ({...state, questionNumberToDisplay: action.questionNumberToDisplay})

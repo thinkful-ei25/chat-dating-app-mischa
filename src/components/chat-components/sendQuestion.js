@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import {postMessage}  from '../../actions/chat';
 import {withRouter} from 'react-router-dom';
 
-
-// import Back from './backBtn'
-
 export class sendQuestion extends Component {
   
   onClickHandler(){
@@ -18,12 +15,11 @@ export class sendQuestion extends Component {
     }
   render(){
     return (
-      <button onClick={()=> this.onClickHandler()}>Send Question!</button>
+      <button className="button send" onClick={()=> this.onClickHandler()}>Send Question!</button>
       )
   }
 }
 const mapStateToProps = (state => {
-  // console.log(state.next);
   return ({
     questions: state.chatroom.questions,
     questionNumberToDisplay: state.chatroom.questionNumberToDisplay

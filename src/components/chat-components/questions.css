@@ -1,0 +1,12 @@
+.questions-area{
+  border: 1px solid black;
+  margin-top: 4px;
+  padding: 10px;
+}
+.questions{
+  font-weight: bold;
+}
+
+.send{
+  margin: 0 10px;
+}

@@ -10,7 +10,7 @@ export class LeaveChatRoom extends Component {
   }
   render(){
     return (
-      <button onClick={()=>this.onClickHandler()}>Leave Room</button>
+      <button className="button leave-chatroom" onClick={()=>this.onClickHandler()}>Leave Room</button>
     )
   }
 }

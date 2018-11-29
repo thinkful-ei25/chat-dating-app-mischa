@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import Chat from './chat-date';
+import ChatArea from './chat-date';
 
-describe('<Chat />', () => {
+describe('<ChatArea />', () => {
   it('Renders without crashing', ()=> {
-    shallow(<Chat />);
+    shallow(<ChatArea />);
   })
 })

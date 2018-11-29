@@ -1,0 +1,22 @@
+.navButton{
+  background-color: rgb(131, 141, 250);
+  border: .5px solid grey;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+#infoOverlay{
+  float: right;
+}
+
+
+nav{
+  border-bottom: 1px solid grey;
+}

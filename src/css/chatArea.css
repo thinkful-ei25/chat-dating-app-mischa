@@ -3,9 +3,20 @@
   overflow: auto;
   border: 1px solid grey;
   margin: 0;
+  background-color: rgba(196, 139, 158, 0.146);
 }
 
 ul{
   list-style-type: none;
-  
+   
+}
+.user{
+  font-weight: bold;
+}
+.me{
+  color: rgb(102, 110, 193);
+
+}
+.partner{
+  color: rgb(255, 0, 162);
 }

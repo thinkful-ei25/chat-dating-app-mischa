@@ -2,16 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages }  from '../../actions/chat';
 import LeaveChatRoom from './leaveRoom';
-import {logout}  from '../../actions/auth';
-import {leaveChatRoom} from '../../actions/chat-room';
-import Beforeunload from 'react-beforeunload';
-import {stillActive} from '../../actions/auth';
 import Input from './input';
-import Send from './sendQuestion';
 import Logout from './logout';
 import Questions from './questions';
 import {withRouter} from 'react-router-dom';
-import {API_BASE_URL} from '../../config';
 import '../../css/chatArea.css'
 import $ from 'jquery';
 
@@ -46,27 +40,28 @@ export class ChatArea extends Component {
   }
 
 
-  //stop pigging db on sign out
+  //stop polling server on sign out
   componentWillUnmount(){
     clearInterval(this.interval);
   }
 
   renderComponents(){
     const isActive = this.props.active;
-    const numberOfUsers = this.props.users.length;
+    const numberOfUsers = this.props.activeUsers.length;
 
       if ((numberOfUsers === 1) && isActive){
         return (
           <div>just waiting for someone to join!</div>
         )
       }else if((numberOfUsers === 1) && !isActive){
+        console.log('state when user leaves room: ', this.props.state);
           return (
             <div>Oh no! User left!</div>
           )
       }else if ((numberOfUsers === 2) && isActive){
         return(
           <Fragment>
-            <Questions /> <Send /> 
+            <Questions />
             
             <Input />    
           </Fragment>
@@ -81,14 +76,20 @@ export class ChatArea extends Component {
     }
     const chatMessages = this.props.messages.map((message) => {
       return (
-      <li key={message.id}>
-        <span>{message.userName}:</span> 
-        <span>{message.message}</span>
-      </li>
+      <tr key={message.id}>
+      {/* <th>  header*/}
+        <td className={message.userName === this.props.username ? "me user" : "partner user"}>
+          <span>{message.userName}:</span> 
+        </td>
+        <td>
+          <span>{message.message}</span>
+        </td>
+        
+      </tr>
       )
     })
 
-    const users = this.props.usersInRoom.map((user, idx) => {
+    const users = this.props.activeUsers.map((user, idx) => {
       return (
         <li key={idx}>
           {user.username}
@@ -99,14 +100,14 @@ export class ChatArea extends Component {
       <Fragment>
         <div>
           <section className="users">
-            <ul >
+            <table >
               {this.props.users.length > 1 ? 'users': 'user'} : {users}
-            </ul>
+            </table>
          </section>
          <section className="chat-area">
-            <ul className="messages">
+            <table className="messages">
               {chatMessages}
-            </ul>
+            </table>
 
          
          </section>
@@ -120,13 +121,13 @@ export class ChatArea extends Component {
 
         </div>
 
-        <div>
+        <span>
           <LeaveChatRoom />
-        </div>
+        </span>
         
-        <div>
+        <span>
           <Logout /> 
-        </div>
+        </span>
       </Fragment>
     )
   }
@@ -134,12 +135,13 @@ export class ChatArea extends Component {
 
 const mapStatetoProps = (state) => {
   return ({
-
+    state,
     messages: state.chat.chatWindow,
     loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
-    usersInRoom: state.chatroom.users,
+    username: state.auth.currentUser ? state.auth.currentUser.username : null,
+    // usersInRoom: state.chatroom.users,
+    activeUsers: state.chatroom.activeUsers,
     jwt: state.auth.authToken,
-    asker: state.chatroom.asker,
     roomId: state.chatroom.roomId,
     url: state.chatroom.roomUrl,
     questions: state.chatroom.questions,

@@ -6,6 +6,7 @@ import {
     AUTH_ERROR,
     LOGOUT_WARNING,
     STAY_LOGGEDIN,
+    OVERLAY
 } from '../actions/auth';
 
 const initialState = {
@@ -14,9 +15,16 @@ const initialState = {
     loading: false,
     error: null,
     logoutWarning: false,
+    overlay: false
 };
 
 export default function reducer(state = initialState, action) {
+    if (action.type === OVERLAY){
+        return Object.assign({}, state, {
+            overlay: action.boolean
+        })
+    }
+
     if (action.type === SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
             authToken: action.authToken

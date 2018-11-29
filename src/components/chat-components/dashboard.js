@@ -7,11 +7,7 @@ import {withRouter} from 'react-router-dom';
 import Logout from './logout';
 
 export class Dashboard extends Component {
-  componentDidMount(){
-    // setInterval(() => {
-    //   this.props.dispatch(stillActive());
-    // }, 1000 * 3)    
-  };
+
   render(){
     if (!this.props.loggedIn) {
       this.props.history.push('/');
@@ -19,7 +15,7 @@ export class Dashboard extends Component {
     }else{
       return (
         <Fragment>
-          {/* <ActiveRooms /> */}
+          <ActiveRooms />
           <JoinRandomRoom />
           <h2>Do you want to start a chat?</h2>
           <NewChatRoom />

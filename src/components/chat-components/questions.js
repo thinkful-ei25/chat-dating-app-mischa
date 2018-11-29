@@ -2,6 +2,8 @@ import React,{Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import PreviousNextBtn from './previousNextBtn';
+import Send from './sendQuestion';
+import './questions.css'
 // import Back from './backBtn'
 
 export class Questions extends Component {
@@ -10,15 +12,16 @@ export class Questions extends Component {
   render(){
     console.log('questions props: ', this.props);
     return (
-      <Fragment>
-        <div>
+      <section className="questions-area">
+        <div className="questions">
           {this.props.questions[this.props.questionNumberToDisplay]}
         </div>
-        
         <PreviousNextBtn prevNext={'previous'}/>
+        <Send />
         <PreviousNextBtn prevNext={'next'}/>
-     </Fragment>
-      )
+      </section>
+    )
+  
   }
 }
 const mapStateToProps = (state => {

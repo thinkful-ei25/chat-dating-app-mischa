@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import landingPage from '../../css/landingPage.css'
-
-import LoginForm from './login-form';
+import '../../css/landingPage.css'
 
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's dashboard
@@ -19,7 +17,8 @@ export function LandingPage(props) {
             <article className="description">
             <p className="content">
                 The hottest new dating app! It's like Tinder, but more random, less awkward,
-                and until we implement more feauters, you'll never have (or be able) to talk to the same person twice!
+                and until we implement more featers, you'll never have (or be able) to talk to the same person twice! 
+                Hit HELP in the upper right hand corner for more details.
             </p>
             </article>
             <div className="auth-butn-container">

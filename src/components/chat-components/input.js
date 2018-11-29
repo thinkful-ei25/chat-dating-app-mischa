@@ -25,7 +25,7 @@ export class Input extends Component {
       }>
         <input type="text" placeholder="chat!" ref={input => this.chat = input} />
             
-        <input type="submit" value="send"/>
+        <input className="button send" type="submit" value="send"/>
       </form>
     )
   }
