@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, withRouter, Redirect} from 'react-router-dom';
+import {Route, withRouter, Switch} from 'react-router-dom';
 
 import ChatArea from './chatArea';
 import Dashboard from '../dashboard-components/dashboard';
@@ -7,6 +7,7 @@ import NavBar from '../auth-components/nav-bar';
 import RegistrationPage from '../auth-components/registration-page';
 import LoginPage from '../auth-components/login-page';
 import LandingPage from '../auth-components/landingPage';
+import NoMatch from './404';
 
 import './chat-date.css';
 
@@ -20,14 +21,16 @@ export class Chat extends Component {
       <div className="background-image">
         
       </div>
-        <Redirect exact path="/chat-room/" to="/"/>
         <NavBar />
-        <Route exact path='/' component={LandingPage} />
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/chat-area' component={ChatArea} />
-        <Route exact path='/login' component={LoginPage} />
-        <Route exact path="/register" component={RegistrationPage} />
-        <Route exact path="/chat-room/:newRoom" component={ChatArea} />
+        <Switch>
+          <Route exact path='/' component={LandingPage} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/chat-area' component={ChatArea} />
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path="/register" component={RegistrationPage} />
+          <Route exact path="/chat-room/:newRoom" component={ChatArea} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
       
     )

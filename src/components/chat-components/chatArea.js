@@ -73,6 +73,7 @@ export class ChatArea extends Component {
       this.props.history.push('/');
       return null;
     }
+    
     const chatMessages = this.props.messages.map((message) => {
       return (
       <tr key={message.id}>
@@ -98,10 +99,11 @@ export class ChatArea extends Component {
     })
     return(
       <Fragment>
-
+          
           <section className="users">
+            <p> {this.props.users.length > 1 ? 'users in room': 'user in room'} :  </p>
             <ul>
-              {this.props.users.length > 1 ? 'users in room': 'user in room'} : {users}
+             {users}
             </ul >
          </section>
             <table className="messages chat-area">

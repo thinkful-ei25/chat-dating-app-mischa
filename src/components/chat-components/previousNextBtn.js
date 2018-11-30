@@ -9,11 +9,10 @@ export class PreviousNextBtn extends Component {
   //show previous question or next
   onClickHandler(){
     if(this.props.prevNext === 'next'){
-      let questionNumberToDisplay = (this.props.questionNumberToDisplay + 1) % this.props.questions.length
+      const questionNumberToDisplay = mod(this.props.questionNumberToDisplay +1, this.props.questions.length);
       this.props.dispatch(displayPreviousNextQuestion(questionNumberToDisplay))
     }else{
-      let questionNumberToDisplay = (this.props.questionNumberToDisplay - 1 );
-      questionNumberToDisplay = mod(questionNumberToDisplay, this.props.questions.length)
+      const questionNumberToDisplay = mod(this.props.questionNumberToDisplay -1, this.props.questions.length);
       this.props.dispatch(displayPreviousNextQuestion(questionNumberToDisplay))
     }
     
