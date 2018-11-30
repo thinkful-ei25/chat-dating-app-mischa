@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Flamingle
 
-## Available Scripts
+Flamingle is a dating app for those of us with severe social anxiety! Don't worry about running out of things to say, or questions to ask, because it comes preloaded with a set of fun, interesting and inspiring conversation starters! All you have to do is login and look to see if anyone is waiting for a date. If they are, hit the 'Join room!' and meet your date! If not, start a room and wait for someone to join! Once you're rolling, scroll through preloaded questions or just type something into the chat!
 
-In the project directory, you can run:
+### **`Tech stack`**
+#### Front End with *React.js* and *Redux*
+**Flamingle combines an array of front-end javascript libraries.**
 
-### `npm start`
+For rendering and displaying content we use React.js.  
+State management is handled with Redux, and login/registration forms with Redux-form.  
+Client-side updating uses server/data-base frequent polling.  
+Routing is handled with *react-router-dom*.  
+jQuery is used for forcing synchronous requests to the server - specifically, for logging user activity. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Back End with *Node.js*, *Express.js*, *MongoDB* and *Mongoose*
+Flamingle employs Node.js as the server-side runtime environment.  <br/>
+Routing and middleware are handled by express.js <br/>
+Authentication is done with passport.js middleware, using JWT tokens in the local storage. Password encryption handled with bcrypt salted and hashed.  <br/>
+All persistent data is stored and accessed on Mongodb on mlab.com. Mongoose is used for various CRUD operations on the db, and for organizing data with the use of schemas and models. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### **`LINKS`**
+[Flamingo is hosted on heroku](https://flamingle-app.herokuapp.com/)
 
-### `npm test`
+**Github repos here:** 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+front-end: https://github.com/thinkful-ei25/chat-dating-app-mischa
 
-### `npm run build`
+back-end: 
+https://github.com/thinkful-ei25/chat-date-server-mischa
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **`Navigating repos`**
+**Front-end** 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Root-component: src/chat-components/chat-date.js <br/>
+Chat room: src/chat-components/chatArea.js <br/>
+Chat room actions in: src/actions/chat-room.js <br/>
+Messaging actions in : src/actions/chat.js/ <br/>
+Auth components are all in src/auth-components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Back-end** 
 
-### `npm run eject`
+*Routes are defined in in files ending with xxxRouter.js <br/>*
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Routing in /server.js express's app.use() 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Registration routes: /auth/authRouter.js <br/>
+Login routes: /users/userRouter.js  <br/>
+Chatroom routes: /chatroom/chatRoomRouter.js <br/>
+Messages routes: /messages/messagesRouter.js  <br/>
+ 
+Data is accessed with models created with Mongoose schemas  <br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+User model: /users/userModel.js <br/>
+Chatroom model: /chatroom/chatRoomModel.js
+Messages model: /messages/messagesModel.js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+SCREENSHOTS
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
