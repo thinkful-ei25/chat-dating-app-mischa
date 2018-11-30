@@ -13,6 +13,13 @@ export function LoginPage(props) {
     return (
         <Fragment>
             <h2 className="title">Login to Flamingle!</h2>
+            <div>
+                Demoing instructions: be sure to open the app in two browsers OR using incognito/private
+                <div>
+                    username: demo password: 1234567890<br/>
+                    username: demo2 password: 1234567890<br/> <br/> 
+                </div>
+            </div>
             <LoginForm />
         </Fragment>
     );
