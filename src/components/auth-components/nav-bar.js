@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {leaveChatRoom} from '../../actions/chat-room';
@@ -18,7 +18,6 @@ export class NavBar extends Component {
   }
   
   render(){
-    const imgUrl = "/flamingo-logo.png";
     
     return(
     <nav>
@@ -39,7 +38,7 @@ export class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  inRoom : state.chatroom.roomUrl,
+  inRoom : state.chatroom.active,
   overlay : state.auth.overlay
 })
 export default withRouter(connect(mapStateToProps)(NavBar));

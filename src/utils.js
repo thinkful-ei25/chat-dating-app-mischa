@@ -55,8 +55,6 @@ export function logOutOnClose(pageCleanedUp){
     }
 
 export function addUsernameToMessage(messageData, users){
-  console.log('message data adding username:', messageData);
-  console.log(users);
       const messages = messageData.messages.map((message) => {
             const userIdofMessage = message.user
               users.forEach((user) => {

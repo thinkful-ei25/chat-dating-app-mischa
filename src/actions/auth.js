@@ -4,6 +4,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
+import { refreshChatroomState } from './chat-room';
 
 export const OVERLAY = 'OVERLAY';
 export const overlay = boolean => ({
@@ -135,6 +136,7 @@ export const logout = (tabClosed = false) => (dispatch, getState) => {
         if (response.ok && !tabClosed){
             clearAuthToken();
             dispatch(clearAuth());
+            dispatch(refreshChatroomState());
             // dispatch(logoutFrontEnd());
         }
        

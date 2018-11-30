@@ -3,13 +3,13 @@ import {logout}  from '../../actions/auth';
 import {connect} from 'react-redux';
 import './logout.css';
 export class Logout extends Component {
-  logoutOnClick(){
+  clickHandler(){
     this.props.dispatch(logout());
   }
   render(){
     return(
       <button className="button logout" onClick={
-        () => this.logoutOnClick()
+        () => this.clickHandler()
       }>Logout</button>
       )
   }

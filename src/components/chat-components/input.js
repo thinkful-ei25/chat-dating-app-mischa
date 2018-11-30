@@ -23,7 +23,7 @@ export class Input extends Component {
           this.chat.value = '';
         }
       }>
-        <input classname="messages" style={{width: '85%', marginRight:'10px'}} type="text" placeholder="chat!" ref={input => this.chat = input} />
+        <input className="messages" style={{width: '85%', marginRight:'10px'}} type="text" placeholder="chat!" ref={input => this.chat = input} />
             
         <button className="button" type="submit" >send</button>
       </form>

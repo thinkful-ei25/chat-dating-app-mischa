@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import {Route, withRouter, Redirect} from 'react-router-dom';
+
 import ChatArea from './chatArea';
-import Dashboard from './dashboard';
+import Dashboard from '../dashboard-components/dashboard';
 import NavBar from '../auth-components/nav-bar';
 import RegistrationPage from '../auth-components/registration-page';
 import LoginPage from '../auth-components/login-page';
 import LandingPage from '../auth-components/landingPage';
-import {Route, withRouter, Redirect} from 'react-router-dom';
-import '../../css/chat-date.css';
+
+import './chat-date.css';
 
 import {connect} from 'react-redux';
 
@@ -18,7 +20,6 @@ export class Chat extends Component {
       <div className="background-image">
         
       </div>
-        {/* <img src='http://i66.tinypic.com/2vuzllc.jpg' alt="flamingo wallpaper"/> */}
         <Redirect exact path="/chat-room/" to="/"/>
         <NavBar />
         <Route exact path='/' component={LandingPage} />
@@ -35,8 +36,8 @@ export class Chat extends Component {
 const mapStateToProps = (state) => 
 {
   return ({
-  loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
-  inChatroom: state.chatRoom ? 
+    loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
+    inChatroom: state.chatRoom ? 
     state.chatRoom.users.filter(user => user.id === state.auth.currentUser.id) : null
 })}
 export default withRouter(connect(mapStateToProps)(Chat));

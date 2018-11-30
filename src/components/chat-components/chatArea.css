@@ -1,4 +1,5 @@
 .chat-area{
+  display:block;
   height: 250px;
   overflow: auto;
   border: 1px solid grey;
@@ -12,6 +13,9 @@ ul{
 }
 .user{
   font-weight: bold;
+}
+.active-users{
+  display: inline;
 }
 .me{
   color: rgb(102, 110, 193);

@@ -26,7 +26,6 @@ export const fetchMessages = (url) => (dispatch, getState) => {
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
   const usersInRoom = getState().chatroom.users;
-  console.log('usersInroom:', usersInRoom);
   return (
       fetch(`${API_BASE_URL}/api/chat-window/`, {
         method: 'GET',

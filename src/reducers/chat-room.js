@@ -26,6 +26,7 @@ const initialState={
 }
 
 function reducer(state=initialState, action) {
+  console.log('state in chatroom reducer:', state, action);
   switch(action.type){
 
     case NEWCHATROOMREQUEST:
