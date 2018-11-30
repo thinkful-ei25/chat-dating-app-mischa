@@ -54,6 +54,14 @@ User model: /users/userModel.js <br/>
 Chatroom model: /chatroom/chatRoomModel.js
 Messages model: /messages/messagesModel.js
 
-SCREENSHOTS
+### **`Screenshots`**
+<a href="https://ibb.co/4YYMtrs"><img src="https://i.ibb.co/WPPF5JD/1-flamingaling.png" alt="1-flamingale"></a>
+<a href="https://ibb.co/zXC0qHb"><img src="https://i.ibb.co/fkZPjGt/flamingle-overlay.png" alt="flamingle-overlay"></a>
+<a href="https://ibb.co/k80mLPH"><img src="https://i.ibb.co/3NWRxPr/2-flamingaling.png" alt="2-flamingale"></a>
 
+<a href="https://ibb.co/BBBqLW6"><img src="https://i.ibb.co/ZxxWd4g/3-flamingaling.png" alt="3-flamingale"></a>
+
+<a href="https://ibb.co/kq5CjjC"><img src="https://i.ibb.co/zPQvppv/4-flamingling.png" alt="4-flamingle"></a>
+
+<a href="https://ibb.co/tzcRRGQ"><img src="https://i.ibb.co/W0FCChG/5-flamingling.png" alt="5-flamingle"></a>
 
