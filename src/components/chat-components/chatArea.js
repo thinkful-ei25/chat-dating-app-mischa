@@ -91,9 +91,12 @@ export class ChatArea extends Component {
 
     const users = this.props.activeUsers.map((user, idx) => {
       return (
-        <li key={idx}>
-          {user.username}
-        </li>
+        <tr>
+          <td key={idx}>
+            <span>{user.username}</span>
+          </td>
+        </tr>
+       
       )
     })
     return(

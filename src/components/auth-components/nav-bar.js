@@ -18,11 +18,16 @@ export class NavBar extends Component {
   }
   
   render(){
-    console.log(this.props.overlay);
+    const imgUrl = "/flamingo-logo.png";
+    
     return(
     <nav>
-      <button aria-label="home" className='navButton home' onClick={()=>this.onClickHandler()}>
-      FLAMINGLE
+      <button aria-label="home " className='home ' onClick={()=>this.onClickHandler()}>
+      {/* <div className='logo' style={divStyle}> */}
+      FLAM
+      <img className="logo" src="/flamingo-logo.png" alt="flamingo logo" ></img>
+      {/* </div> */}
+      NGLE
       </button>
       <button id="infoOverlay" className='navButton' onClick={()=> {
         this.onInfoClickHandler()}}>HELP</button>

@@ -17,7 +17,7 @@ export class Dashboard extends Component {
         <Fragment>
           <ActiveRooms />
           <JoinRandomRoom />
-          <h2>Do you want to start a chat?</h2>
+          <h3>Do you want to start a new Pat (chatroom)?</h3>
           <NewChatRoom />
           <Logout /> 
         </Fragment>

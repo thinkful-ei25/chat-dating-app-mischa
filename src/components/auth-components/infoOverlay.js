@@ -4,8 +4,13 @@ import { overlay } from '../../actions/auth';
 
 import './infoOverlay.css';
 export class InfoOverlay extends Component {
+  constructor(props) {
+    super(props);
+    this.details = React.createRef();
+  }
 
   onClickHandler(){
+    
     this.props.dispatch(overlay(false));
   }
   

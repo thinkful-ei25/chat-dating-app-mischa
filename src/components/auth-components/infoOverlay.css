@@ -10,12 +10,9 @@
 .overlay {
   position: absolute;
   padding: 10px;
-  /* width: inh%;
-  height: 100%; */
   top: 30px;
   left: 25%;
   right: 25%;
-  /* bottom: 10%;   */
   white-space: no-wrap;
   z-index: 1;
   color: rgb(168, 144, 184);

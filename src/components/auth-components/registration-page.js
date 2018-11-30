@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import RegistrationForm from './registration-form';
 
@@ -11,10 +11,10 @@ export function RegistrationPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="home">
-            <h2>Register To Date and Chat!</h2>
+        <Fragment>
+            <h2 className="title">Register To Date and Chat!</h2>
             <RegistrationForm />
-        </div>
+        </Fragment>
     );
 }
 

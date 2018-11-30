@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {joinRoom} from '../../actions/chat-room';
 import {withRouter} from 'react-router-dom';
@@ -16,13 +16,17 @@ export class JoinRandomRoom extends Component {
     if(arrayIsEmpty(this.props.activeRooms)){
       return (
         <h3>
-          No active chats! Maybe you should start one :-O 
+          No Flamingaling happening yet! <br />
+          Start a Pat (chatroom) to get Flamingaling! 
         </h3>
       )
     }else{
       return(
-        <button className="button" onClick={() => this.onClickHandler()}>Join a room!</button>
-      )
+        <Fragment>
+        {/* <h3>Joing a random Pat (chatroom)!</h3> */}
+        <button className="button random-room" onClick={() => this.onClickHandler()}>Join a Pat</button>(aka chatroom)
+        </Fragment>
+        )
     }
   }
 }

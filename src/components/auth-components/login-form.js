@@ -4,7 +4,7 @@ import Input from './input';
 import {login} from '../../actions/auth';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
-import loginForm from '../../css/loginForm.css'
+import './login-form.css'
 export class LoginForm extends React.Component {
     onSubmit(values) {
         return this.props.dispatch(login(values.username, values.password));
@@ -30,6 +30,7 @@ export class LoginForm extends React.Component {
                 {error}
                 <label htmlFor="username">Username</label>
                 <Field
+                    className="input-form"
                     component={Input}
                     // component='input'
                     type="text"
@@ -40,6 +41,7 @@ export class LoginForm extends React.Component {
 
                 <label htmlFor="password">Password</label>
                 <Field
+                    className="input-form"
                     component={Input}
                     // component='input'
                     type="password"
@@ -47,12 +49,9 @@ export class LoginForm extends React.Component {
                     id="password"
                     validate={[required, nonEmpty]}
                 />
-                <button className="button login-btn" disabled={this.props.pristine || this.props.submitting}>
+                <button className="button input-form login-btn" disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
-          
-                <p>OR! </p>
-               <Link className="button register-btn" to="/register">Register</Link>
             </form>
         );
     }

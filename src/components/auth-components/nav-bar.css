@@ -1,7 +1,8 @@
+
 .navButton{
   background-color: rgb(131, 141, 250);
   border: .5px solid grey;
-  color: white;
+  color: black;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
@@ -10,6 +11,23 @@
   border-radius: 5px;
   margin: 10px 0;
   font-weight: bold;
+}
+.home{
+  background-color: rgb(131, 141, 250);
+  color: black;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+.logo{
+  height: 18.400px;  
+  background-color: rgba(131, 141, 250, 0);
+  /* border: 1px solid black */
 }
 
 #infoOverlay{

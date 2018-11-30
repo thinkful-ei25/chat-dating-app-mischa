@@ -12,8 +12,8 @@ export function LandingPage(props) {
         return <Redirect to="/dashboard" />;
     }
     return (
-        <div className="home">
-            <h2 className="title">Chatting and Dating!</h2>
+        <div >
+            <h2 className="title">Welcome to Flamingle!</h2>
             <article className="description">
             <p className="content">
                 The hottest new dating app! It's like Tinder, but more random, less awkward,

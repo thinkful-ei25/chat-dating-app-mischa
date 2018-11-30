@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 
@@ -11,11 +11,10 @@ export function LoginPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="home">
-            <h2>Login! To Date and Chat!</h2>
+        <Fragment>
+            <h2 className="title">Login to Flamingle!</h2>
             <LoginForm />
-          
-        </div>
+        </Fragment>
     );
 }
 

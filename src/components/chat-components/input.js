@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {postMessage}  from '../../actions/chat';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-
+import './input.css';
 export class Input extends Component {
 
   render() {
@@ -23,9 +23,9 @@ export class Input extends Component {
           this.chat.value = '';
         }
       }>
-        <input type="text" placeholder="chat!" ref={input => this.chat = input} />
+        <input classname="messages" style={{width: '85%', marginRight:'10px'}} type="text" placeholder="chat!" ref={input => this.chat = input} />
             
-        <input className="button send" type="submit" value="send"/>
+        <button className="button" type="submit" >send</button>
       </form>
     )
   }

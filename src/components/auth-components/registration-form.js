@@ -5,7 +5,7 @@ import {login} from '../../actions/auth';
 import Input from './input';
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators';
 import {Link} from 'react-router-dom';
-import '../../css/registration-form.css';
+import './registration-form.css';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
 
@@ -22,16 +22,17 @@ export class RegistrationForm extends React.Component {
     render() {
         return (
             <form
-                className="login-form"
+                className="login-form input-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
                 <label htmlFor="firstName">First name</label>
-                <Field component={Input} type="text" name="firstName" />
+                <Field   className="input-form" component={Input} type="text" name="firstName" />
                 <label htmlFor="lastName">Last name</label>
-                <Field component={Input} type="text" name="lastName" />
+                <Field   className="input-form" component={Input} type="text" name="lastName" />
                 <label htmlFor="username">Username</label>
                 <Field
+                    className="input-form"
                     component={Input}
                     type="text"
                     name="username"
@@ -39,6 +40,7 @@ export class RegistrationForm extends React.Component {
                 />
                 <label htmlFor="password">Password</label>
                 <Field
+                    className="input-form"
                     component={Input}
                     type="password"
                     name="password"
@@ -46,6 +48,7 @@ export class RegistrationForm extends React.Component {
                 />
                 <label htmlFor="passwordConfirm">Confirm password</label>
                 <Field
+                    className="input-form"
                     component={Input}
                     type="password"
                     name="passwordConfirm"
@@ -56,8 +59,6 @@ export class RegistrationForm extends React.Component {
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
                 </button>
-                <p>OR</p>
-               <Link className="button login-btn" to="/login">Login</Link>
             </form>
         );
     }
