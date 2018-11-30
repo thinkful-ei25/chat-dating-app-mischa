@@ -2,6 +2,12 @@
 
 Flamingle is a dating app for those of us with severe social anxiety! Don't worry about running out of things to say, or questions to ask, because it comes preloaded with a set of fun, interesting and inspiring conversation starters! All you have to do is login and look to see if anyone is waiting for a date. If they are, hit the 'Join room!' and meet your date! If not, start a room and wait for someone to join! Once you're rolling, scroll through preloaded questions or just type something into the chat!
 
+### **`Contents`**
+- [Tech stack](#tech-stack)
+- [Links](#links)
+- [Navigating repos](#navigating-repos)
+- [Screenshots](#screenshots)
+
 ### **`Tech stack`**
 #### Front End with *React.js* and *Redux*
 **Flamingle combines an array of front-end javascript libraries.**
