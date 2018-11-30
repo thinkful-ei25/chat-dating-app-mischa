@@ -21,6 +21,7 @@ export function LandingPage(props) {
                 Hit HELP in the upper right hand corner for more details.
             </p>
             </article>
+            
             <div className="auth-butn-container">
                 <Link to="/login" className="button auth-btn">Login</Link>
                 <span>OR</span>

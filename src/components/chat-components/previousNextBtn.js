@@ -6,11 +6,6 @@ import {mod} from '../../utils';
 // import Back from './backBtn'
 
 export class PreviousNextBtn extends Component {
-  constructor(props) {
-    super(props)
-    
-  }
-
   //show previous question or next
   onClickHandler(){
     if(this.props.prevNext === 'next'){

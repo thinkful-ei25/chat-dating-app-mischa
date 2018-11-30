@@ -7,10 +7,11 @@ export const fetchMessagesRequest = () => ({
   type: FETCHMESSAGES
 });
 export const FETCHMESSAGESSSUCCESS = 'FETCHMESSAGESSUCCESS';
-export const fetchMessagesSuccess = (messageData) => {
+export const fetchMessagesSuccess = (messageData, usersInRoom) => {
   return({
   type: FETCHMESSAGESSSUCCESS,
-  messageData
+  messageData,
+  usersInRoom
   })
 };
 export const FETCHMESSAGESERROR = 'FETCHMESSAGESERROR';
@@ -24,6 +25,8 @@ export const fetchMessagesError = (err) => ({
 export const fetchMessages = (url) => (dispatch, getState) => {
   dispatch(fetchMessagesRequest());
   const authToken = getState().auth.authToken;
+  const usersInRoom = getState().chatroom.users;
+  console.log('usersInroom:', usersInRoom);
   return (
       fetch(`${API_BASE_URL}/api/chat-window/`, {
         method: 'GET',
@@ -34,7 +37,7 @@ export const fetchMessages = (url) => (dispatch, getState) => {
       })
       .then(data => {
         const {id, users, url, active} = data;
-        dispatch(fetchMessagesSuccess(data));
+        dispatch(fetchMessagesSuccess(data, usersInRoom));
         dispatch(refreshChatroomState(id, users, url, active));
       })
         .catch(err => dispatch(fetchMessagesError(err)))

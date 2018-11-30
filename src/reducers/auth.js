@@ -23,9 +23,7 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             overlay: action.boolean
         })
-    }
-
-    if (action.type === SET_AUTH_TOKEN) {
+    } else if (action.type === SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
             authToken: action.authToken
         });

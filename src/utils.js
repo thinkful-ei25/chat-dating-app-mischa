@@ -54,10 +54,12 @@ export function logOutOnClose(pageCleanedUp){
     }
     }
 
-export function addUsernameToMessage(messageData){
+export function addUsernameToMessage(messageData, users){
+  console.log('message data adding username:', messageData);
+  console.log(users);
       const messages = messageData.messages.map((message) => {
             const userIdofMessage = message.user
-              messageData.users.forEach((user) => {
+              users.forEach((user) => {
                 if (user.id === userIdofMessage) {
                   message.userName = user.username;
                 }

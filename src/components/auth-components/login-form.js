@@ -30,7 +30,7 @@ export class LoginForm extends React.Component {
                 {error}
                 <label htmlFor="username">Username</label>
                 <Field
-                    className="input-form"
+                    
                     component={Input}
                     // component='input'
                     type="text"

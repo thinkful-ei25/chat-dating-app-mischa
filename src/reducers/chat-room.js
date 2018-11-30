@@ -43,7 +43,6 @@ function reducer(state=initialState, action) {
         roomId: action.roomId,
         questions: shuffle(action.questions),
         activeRoom: true,
-        asker: action.userId,
         waitingForPartner: true
       }
 
@@ -86,7 +85,7 @@ function reducer(state=initialState, action) {
     case REFRESHCHATROOMSTATE: 
        return {
          ...state,
-         users: action.users,
+         users: action.active ? action.users : state.users,
          activeUsers: action.users,
          roomUrl : action.roomUrl,
          roomId: action.roomId,

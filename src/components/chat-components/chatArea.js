@@ -54,7 +54,6 @@ export class ChatArea extends Component {
           <div>just waiting for someone to join!</div>
         )
       }else if((numberOfUsers === 1) && !isActive){
-        console.log('state when user leaves room: ', this.props.state);
           return (
             <div>Oh no! User left!</div>
           )
@@ -137,8 +136,8 @@ export class ChatArea extends Component {
 }
 
 const mapStatetoProps = (state) => {
+  console.log('state in chatarea', state);
   return ({
-    state,
     messages: state.chat.chatWindow,
     loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
     username: state.auth.currentUser ? state.auth.currentUser.username : null,
