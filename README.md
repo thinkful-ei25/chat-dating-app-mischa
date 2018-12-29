@@ -25,7 +25,7 @@ Authentication is done with passport.js middleware, using JWT tokens in the loca
 All persistent data is stored and accessed on Mongodb on mlab.com. Mongoose is used for various CRUD operations on the db, and for organizing data with the use of schemas and models. 
 
 ### **`LINKS`**
-[Flamingo is hosted on heroku](https://flamingle-app.herokuapp.com/)
+[Flamingle is hosted on heroku](https://flamingle-app.herokuapp.com/)
 
 **Github repos here:** 
 
