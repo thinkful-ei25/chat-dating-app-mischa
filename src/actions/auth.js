@@ -6,7 +6,7 @@ import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 import { refreshChatroomState } from './chat-room';
 
-export const OVERLAY = 'OVERLAY';
+export const OVERLAY = 'OVERLAY'; 
 export const overlay = boolean => ({
     type: OVERLAY,
     boolean

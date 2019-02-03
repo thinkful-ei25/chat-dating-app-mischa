@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {startChatRoom} from '../../actions/chat-room';
 import {withRouter, Redirect} from 'react-router-dom';
-
+import './newChatRoomBtn.css'
 export class NewChatRoom extends Component {
   state = {
     chatRoomUrl: null,
