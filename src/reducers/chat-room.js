@@ -11,6 +11,7 @@ import {
   REFRESHCHATROOMSTATE,
   DEACTIVATEROOM,
   DISPLAYPREVIOUSNEXTQUESTION,
+  USERJOINED,
 } from '../actions/chat-room';
 import { arrayIsEmpty, shuffle } from '../utils';
 
@@ -19,14 +20,15 @@ const initialState = {
   joinChatLoading: false,
   leaveChatLoading: false,
   err: null,
-  users: [],
+  user1: null,
+  user2: null,
   activeUsers: [],
   roomUrl: null,
   roomId: null,
   activeRoom: false,
   questions: [],
   questionNumberToDisplay: 0,
-  waitingForPartner: false,
+  waiting: false,
 };
 
 function reducer(state = initialState, action) {
@@ -39,7 +41,6 @@ function reducer(state = initialState, action) {
         ...state,
         loading: false,
         users: [action.userId],
-        activeUsers: [action.userId],
         /* chatWindow: action.messagesList, */
 
         err: null,
@@ -47,7 +48,7 @@ function reducer(state = initialState, action) {
         roomId: action.roomId,
         questions: shuffle(action.questions),
         activeRoom: true,
-        waitingForPartner: true,
+        waiting: true,
       };
 
     case NEWCHATROOMFAILURE:
@@ -56,15 +57,24 @@ function reducer(state = initialState, action) {
     case JOINCHATROOMREQUEST:
       return { ...state, joinChatLoading: true };
 
-    case JOINCHATROOMSUCCESS:
+    // case JOINCHATROOMSUCCESS:
+    //   return {
+    //     ...state,
+    //     joinChatLoading: false,
+    //     users: [...state.users, action.userId],
+    //     waiting: false,
+    //     questions: shuffle(action.questions),
+    //   };
+    case USERJOINED:
+      const { user1, user2 } = action.users;
       return {
         ...state,
-        joinChatLoading: false,
-        users: [...state.users, action.userId],
-        activeUsers: [...state.users, action.userId],
-        waitingForPartner: false,
-        questions: shuffle(action.questions),
+        user1,
+        user2,
+        waiting: user2.active ? false : true,
       };
+    case DEACTIVATEROOM:
+      return { ...state, user1: action.data.user1, user2: action.data.user2 };
 
     case LEAVECHATROOMREQUEST:
       return { ...state, leaveChatLoading: true };
@@ -96,11 +106,6 @@ function reducer(state = initialState, action) {
         roomId: action.roomId,
         activeRoom: action.active,
       };
-
-    case DEACTIVATEROOM:
-      return arrayIsEmpty(state.users)
-        ? { ...state, activeRoom: false }
-        : state;
 
     case DISPLAYPREVIOUSNEXTQUESTION:
       return {

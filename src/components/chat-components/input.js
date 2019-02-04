@@ -3,7 +3,6 @@ import { postMessage } from '../../actions/chat';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import './input.css';
 export class Input extends Component {
   constructor(props) {
@@ -14,24 +13,16 @@ export class Input extends Component {
     this.socket = io(API_BASE_URL);
   }
   onSubmit(e) {
-    const roomUrl = this.props.location.pathname;
+    // const roomUrl = this.props.location.pathname;
+    // console.log(roomUrl);
+    const { url } = this.props;
+    console.log(url);
     e.preventDefault();
     this.socket.emit('SEND_MESSAGE', {
       message: this.chat.value,
-      url: this.props.roomAddress,
+      url,
       username: this.props.username,
     });
-    this.props.dispatch(
-      postMessage(
-        {
-          username: this.props.username,
-          userId: this.props.userId,
-          roomId: this.props.roomId,
-          message: this.chat.value,
-        },
-        roomUrl
-      )
-    );
     this.chat.value = '';
   }
 
@@ -54,7 +45,7 @@ export class Input extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     userId: state.auth.currentUser ? state.auth.currentUser.id : null,
     username: state.auth.currentUser ? state.auth.currentUser.username : null,
@@ -62,4 +53,4 @@ const mapStateToProps = state => {
     url: state.chatroom.roomUrl,
   };
 };
-export default withRouter(connect(mapStateToProps)(Input));
+export default connect(mapStateToProps)(Input);

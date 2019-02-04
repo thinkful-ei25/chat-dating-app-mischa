@@ -11,7 +11,6 @@ export class ActiveRooms extends React.Component {
   componentDidMount() {
     this.socket.emit('find-room');
     this.socket.on('active-rooms', data => {
-      console.log(data);
       this.props.dispatch(getActiveRoomsSuccess(data));
     });
   }
