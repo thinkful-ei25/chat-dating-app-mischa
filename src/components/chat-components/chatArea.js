@@ -36,7 +36,8 @@ export class ChatArea extends Component {
   }
 
   componentDidMount() {
-    this.socket.emit('subscribe', this.props.roomAddress);
+    const { pathname, username } = this.props;
+    this.socket.emit('subscribe', { chatroom: pathname, username });
 
     const roomUrl = this.props.location.pathname;
     this.props.dispatch(fetchMessages(roomUrl));
@@ -72,6 +73,7 @@ export class ChatArea extends Component {
   }
   render() {
     const { id: socketId } = this.socket;
+    console.log('socket', socketId);
     if (!this.props.loggedIn) {
       this.props.history.push('/');
       return null;
@@ -137,8 +139,7 @@ export class ChatArea extends Component {
 
 const mapStatetoProps = (state, ownProps) => {
   const { pathname } = ownProps.history.location;
-  const [, , roomAddress] = pathname.split('/');
-  console.log(roomAddress);
+  // const [, , roomAddress] = pathname.split('/');
   return {
     messages: state.chat.chatWindow,
     loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
@@ -151,7 +152,7 @@ const mapStatetoProps = (state, ownProps) => {
     questions: state.chatroom.questions,
     users: state.chatroom.users,
     active: state.chatroom.activeRoom,
-    roomAddress,
+    pathname,
   };
 };
 export default withRouter(connect(mapStatetoProps)(ChatArea));

@@ -1,29 +1,29 @@
 import {
   GETACTIVEROOMSREQUEST,
   GETACTIVEROOMSSUCCESS,
-  GETACTIVEROOMSFAILURE
-} 
-from '../actions/dashboard'
-const initialState={
-  username : null,
-  activeRooms: [],
+  GETACTIVEROOMSFAILURE,
+} from '../actions/dashboard';
+const initialState = {
+  username: null,
+  activeRooms: null,
   loading: false,
-  err: null
-}
+  err: null,
+};
 
-function reducer(state=initialState, action){
-  switch(action.type){
+function reducer(state = initialState, action) {
+  switch (action.type) {
     case GETACTIVEROOMSREQUEST:
-      return{...state, loading: true}
+      return { ...state, loading: true };
     case GETACTIVEROOMSSUCCESS:
       return {
         ...state,
         loading: false,
-        activeRooms: action.activeRooms
-      }
+        activeRooms: action.activeRooms,
+      };
     case GETACTIVEROOMSFAILURE:
-      return{...state, err: action.err}
+      return { ...state, err: action.err };
     default:
       return state;
-  }}
-  export default reducer;
+  }
+}
+export default reducer;

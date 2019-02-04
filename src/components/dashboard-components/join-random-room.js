@@ -1,16 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { joinRoom } from '../../actions/chat-room';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { arrayIsEmpty } from '../../utils';
 export class JoinRandomRoom extends Component {
   onClickHandler() {
-    const num = Math.floor(Math.random() * this.props.activeRooms.length);
-    const { url } = this.props.activeRooms[num];
-    this.props.dispatch(joinRoom(this.props.history, url));
+    this.props.dispatch(joinRoom(this.props.history, this.props.activeRooms));
   }
   render() {
-    if (arrayIsEmpty(this.props.activeRooms)) {
+    const { activeRooms } = this.props;
+    if (!activeRooms) {
       return (
         <h3>
           No Flamingaling happening yet! <br />
@@ -21,12 +20,9 @@ export class JoinRandomRoom extends Component {
       return (
         <Fragment>
           {/* <h3>Joing a random Pat (chatroom)!</h3> */}
-          <button
-            className="button random-room"
-            onClick={() => this.onClickHandler()}
-          >
-            Join a Pat
-          </button>
+          <Link to={activeRooms} className="button random-room">
+            Join Pat
+          </Link>
           (aka chatroom)
         </Fragment>
       );
@@ -35,9 +31,7 @@ export class JoinRandomRoom extends Component {
 }
 const mapStatetoProps = state => {
   return {
-    activeRooms:
-      state.dashboard &&
-      state.dashboard.activeRooms.filter(room => room.users.length < 2),
+    activeRooms: state.dashboard && state.dashboard.activeRooms,
   };
 };
-export default withRouter(connect(mapStatetoProps)(JoinRandomRoom));
+export default connect(mapStatetoProps)(JoinRandomRoom);
