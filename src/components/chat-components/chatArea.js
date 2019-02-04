@@ -73,7 +73,6 @@ export class ChatArea extends Component {
   }
   render() {
     const { id: socketId } = this.socket;
-    console.log('socket', socketId);
     if (!this.props.loggedIn) {
       this.props.history.push('/');
       return null;

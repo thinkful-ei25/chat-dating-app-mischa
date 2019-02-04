@@ -1,12 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { joinRoom } from '../../actions/chat-room';
 import { Link } from 'react-router-dom';
-import { arrayIsEmpty } from '../../utils';
 export class JoinRandomRoom extends Component {
-  onClickHandler() {
-    this.props.dispatch(joinRoom(this.props.history, this.props.activeRooms));
-  }
   render() {
     const { activeRooms } = this.props;
     if (!activeRooms) {

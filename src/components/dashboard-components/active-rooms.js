@@ -1,8 +1,6 @@
 import React from 'react';
 import { getActiveRoomsSuccess } from '../../actions/dashboard';
-import { joinRoom } from '../../actions/chat-room';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 export class ActiveRooms extends React.Component {
