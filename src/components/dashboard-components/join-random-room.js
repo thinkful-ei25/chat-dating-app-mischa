@@ -1,25 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import './join-random-room.css';
 export class JoinRandomRoom extends Component {
   render() {
     const { activeRooms } = this.props;
     if (!activeRooms) {
       return (
-        <h3>
-          No Flamingaling happening yet! <br />
+        <div className="dashboard-content">
           Start a Pat (chatroom) to get Flamingaling!
-        </h3>
+        </div>
       );
     } else {
       return (
-        <Fragment>
-          {/* <h3>Joing a random Pat (chatroom)!</h3> */}
-          <Link to={activeRooms} className="button random-room">
+        <section className="random-room">
+          <Link to={activeRooms} className="button">
             Join Pat
           </Link>
           (aka chatroom)
-        </Fragment>
+        </section>
       );
     }
   }

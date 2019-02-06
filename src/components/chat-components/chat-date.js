@@ -27,7 +27,7 @@ export class Chat extends Component {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegistrationPage} />
           <Route exact path="/chat-room/:newRoom" component={ChatArea} />
-          {/* <Route component={NoMatch} /> */}
+          <Route component={NoMatch} />
         </Switch>
       </div>
     );

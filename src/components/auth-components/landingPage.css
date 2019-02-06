@@ -1,26 +1,22 @@
-.title{
-  text-align: center
+.title {
+  text-align: center;
 }
 
-.register-btn{
+.register-btn {
   border-radius: 5px;
 }
 
-.description{
+.description {
   width: 75%;
   margin: 0 auto 15px auto;
 }
 
-.content{
+.content {
   text-align: justify;
 }
-.auth-butn-container{
-  width: 100%;
-  display: table;
-  text-align: center;
-}
 
-.auth-btn{
-  display: inline-block;
-  margin: 0 10px;
+.auth-btn {
+  width: 80px;
+  display: block;
+  margin: 0 auto;
 }

@@ -11,13 +11,9 @@ function onInfoClickHandler(dispatch) {
 }
 export function NavBar({ dispatch }) {
   return (
-    <nav>
+    <nav className="nav-bar">
       <Link aria-label="home " className="home " to="/dashboard">
-        {/* <div className='logo' style={divStyle}> */}
-        FLAM
         <img className="logo" src="/flamingo-logo.png" alt="flamingo logo" />
-        {/* </div> */}
-        NGLE
       </Link>
       <button
         id="infoOverlay"
