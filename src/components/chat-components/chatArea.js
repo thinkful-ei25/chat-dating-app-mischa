@@ -34,24 +34,18 @@ export class ChatArea extends Component {
 
   //stop polling server on sign out
   componentWillUnmount() {
-    clearInterval(this.interval);
     this.socket.disconnect();
   }
 
   renderComponents() {
     // const numberOfUsers = this.props.activeUsers.length;
-    const {
-      user1,
-      user2,
-      active,
-      username,
-      questions,
-      number,
-      url,
-    } = this.props;
-    /* DEAL WITH USERS COMING AND GOING */
+    const { username, questions, number, url, active, waiting } = this.props;
     const question = questions[number];
-    if (user1 && user2 && user1.active && user2.active) {
+    if (!active) {
+      return <div>Your partner left!</div>;
+    } else if (waiting) {
+      return <div>waiting</div>;
+    } else {
       return (
         <Fragment>
           <Questions
@@ -125,7 +119,7 @@ const mapStatetoProps = (state, ownProps) => {
   const {
     user1,
     user2,
-    activeRoom: active,
+    active,
     waiting,
     questions,
     questionNumberToDisplay: number,

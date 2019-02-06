@@ -52,30 +52,22 @@ function reducer(state = initialState, action) {
     case NEWCHATROOMFAILURE:
       return { ...state, loading: false, err: action.err };
 
-    case JOINCHATROOMREQUEST:
-      return { ...state, joinChatLoading: true };
-
-    // case JOINCHATROOMSUCCESS:
-    //   return {
-    //     ...state,
-    //     joinChatLoading: false,
-    //     users: [...state.users, action.userId],
-    //     waiting: false,
-    //     questions: shuffle(action.questions),
-    //   };
     case USERJOINED:
-      const { user1, user2 } = action.users;
+      let { user1, user2 } = action.users;
       return {
         ...state,
+        active: true,
         user1,
         user2,
         waiting: user2.active ? false : true,
       };
     case DEACTIVATEROOM:
-      return { ...state, user1: action.data.user1, user2: action.data.user2 };
-
-    case JOINCHATROOMFAILURE:
-      return { ...state, leaveChatLoading: false, err: action.err };
+      return {
+        ...state,
+        active: false,
+        user1: action.data.user1,
+        user2: action.data.user2,
+      };
 
     case REFRESHCHATROOMSTATE:
       return {
