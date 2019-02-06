@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
-import { postMessage } from '../../actions/chat';
-import io from 'socket.io-client';
-import { API_BASE_URL } from '../../config';
-import { connect } from 'react-redux';
 import './input.css';
-export class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatroom: null,
-    };
-    this.socket = io(API_BASE_URL);
-  }
+
+export default class Input extends Component {
   onSubmit(e) {
-    // const roomUrl = this.props.location.pathname;
-    // console.log(roomUrl);
-    const { url } = this.props;
-    console.log(url);
     e.preventDefault();
-    this.socket.emit('SEND_MESSAGE', {
+    const { socket, url, username } = this.props;
+    socket.emit('send_message', {
       message: this.chat.value,
       url,
-      username: this.props.username,
+      username,
     });
     this.chat.value = '';
   }
-
   render() {
     return (
       <form onSubmit={e => this.onSubmit(e)}>
@@ -34,7 +20,7 @@ export class Input extends Component {
           className="messages"
           style={{ width: '85%', marginRight: '10px' }}
           type="text"
-          placeholder="chat!"
+          placeholder="say something"
           ref={input => (this.chat = input)}
         />
 
@@ -45,12 +31,3 @@ export class Input extends Component {
     );
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  return {
-    userId: state.auth.currentUser ? state.auth.currentUser.id : null,
-    username: state.auth.currentUser ? state.auth.currentUser.username : null,
-    roomId: state.chatroom.roomId,
-    url: state.chatroom.roomUrl,
-  };
-};
-export default connect(mapStateToProps)(Input);

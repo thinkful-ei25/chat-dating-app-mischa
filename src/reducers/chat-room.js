@@ -5,13 +5,11 @@ import {
   JOINCHATROOMREQUEST,
   JOINCHATROOMSUCCESS,
   JOINCHATROOMFAILURE,
-  LEAVECHATROOMREQUEST,
-  LEAVECHATROOMSUCCESS,
-  LEAVECHATROOMFAILURE,
   REFRESHCHATROOMSTATE,
   DEACTIVATEROOM,
   DISPLAYPREVIOUSNEXTQUESTION,
   USERJOINED,
+  IMPORTQUESTIONS,
 } from '../actions/chat-room';
 import { arrayIsEmpty, shuffle } from '../utils';
 
@@ -26,7 +24,7 @@ const initialState = {
   roomUrl: null,
   roomId: null,
   activeRoom: false,
-  questions: [],
+  questions: null,
   questionNumberToDisplay: 0,
   waiting: false,
 };
@@ -36,17 +34,17 @@ function reducer(state = initialState, action) {
     case NEWCHATROOMREQUEST:
       return { ...state, loading: true };
 
+    case IMPORTQUESTIONS:
+      return { ...state, questions: shuffle(action.questions) };
     case NEWCHATROOMSUCCESS:
       return {
         ...state,
         loading: false,
         users: [action.userId],
-        /* chatWindow: action.messagesList, */
-
         err: null,
         roomUrl: action.roomUrl,
         roomId: action.roomId,
-        questions: shuffle(action.questions),
+        questions: shuffle(state.questions),
         activeRoom: true,
         waiting: true,
       };
@@ -76,26 +74,8 @@ function reducer(state = initialState, action) {
     case DEACTIVATEROOM:
       return { ...state, user1: action.data.user1, user2: action.data.user2 };
 
-    case LEAVECHATROOMREQUEST:
-      return { ...state, leaveChatLoading: true };
-
     case JOINCHATROOMFAILURE:
       return { ...state, leaveChatLoading: false, err: action.err };
-
-    case LEAVECHATROOMSUCCESS:
-      return {
-        ...state,
-        loading: false,
-        activeUsers: state.users.filter(userId => userId !== action.userId),
-        roomUrl: null,
-        roomId: null,
-        active: false,
-        leaveChatLoading: false,
-        questions: [],
-      };
-
-    case LEAVECHATROOMFAILURE:
-      return { ...state, loading: false, err: action.err };
 
     case REFRESHCHATROOMSTATE:
       return {

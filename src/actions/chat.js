@@ -23,6 +23,8 @@ export const fetchMessagesError = err => ({
   type: FETCHMESSAGESERROR,
   err,
 });
+export const WIPEMESSAGES = 'WIPEMESSAGES';
+export const wipeMessages = () => ({ type: WIPEMESSAGES });
 
 export const fetchMessages = url => (dispatch, getState) => {
   dispatch(fetchMessagesRequest());

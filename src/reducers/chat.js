@@ -3,6 +3,7 @@ import {
   FETCHMESSAGESSSUCCESS,
   FETCHMESSAGESERROR,
   NEWMESSAGE,
+  WIPEMESSAGES,
 } from '../actions/chat';
 import { addUsernameToMessage } from '../utils';
 const initialState = {
@@ -32,6 +33,9 @@ function reducer(state = initialState, action) {
 
     case NEWMESSAGE:
       return { ...state, chatWindow: [...state.chatWindow, action.message] };
+
+    case WIPEMESSAGES:
+      return { ...state, chatWindow: [] };
     default:
       return state;
   }

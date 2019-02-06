@@ -1,30 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 import PreviousNextBtn from './previousNextBtn';
-import Send from './sendQuestion';
 import './questions.css';
-// import Back from './backBtn'
 
-export class Questions extends Component {
-  render() {
-    return (
-      <section className="questions-area">
-        <div className="questions">
-          {this.props.questions[this.props.questionNumberToDisplay]}
-        </div>
-        <PreviousNextBtn prevNext={'previous'} />
-        <Send />
-        <PreviousNextBtn prevNext={'next'} />
-      </section>
-    );
-  }
+function onClick(socket, question, url, username) {
+  socket.emit('send_message', {
+    message: question,
+    url,
+    username,
+  });
 }
-const mapStateToProps = state => {
-  return {
-    questions: state.chatroom.questions,
-    questionNumberToDisplay: state.chatroom.questionNumberToDisplay,
-  };
-};
 
-export default withRouter(connect(mapStateToProps)(Questions));
+export default function Questions({ question, socket, username, url }) {
+  return (
+    <section className="questions-area">
+      <div className="questions">{question}</div>
+      <PreviousNextBtn prevNext={'previous'} />
+      <button
+        className="button send"
+        onClick={e => onClick(socket, question, url, username)}
+      >
+        Ask Question
+      </button>
+      <PreviousNextBtn prevNext={'next'} />
+    </section>
+  );
+}

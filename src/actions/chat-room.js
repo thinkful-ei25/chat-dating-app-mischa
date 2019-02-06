@@ -55,23 +55,6 @@ export const joinChatRoomFailure = err => ({
   err,
 });
 
-export const LEAVECHATROOMREQUEST = 'LEAVECHATROOMREQUEST';
-export const leaveChatRoomRequest = () => ({ type: LEAVECHATROOMREQUEST });
-
-export const LEAVECHATROOMSUCCESS = 'LEAVECHATROOMSUCCESS';
-export const leaveChatRoomSuccess = userId => {
-  return {
-    type: LEAVECHATROOMSUCCESS,
-    userId,
-  };
-};
-
-export const LEAVECHATROOMFAILURE = 'LEAVECHATROOMFAILURE';
-export const leaveChatRoomFailure = err => ({
-  type: LEAVECHATROOMFAILURE,
-  err,
-});
-
 export const DEACTIVATEROOM = 'DEACTIVATEROOM';
 export const deactivateRoom = data => ({ type: DEACTIVATEROOM, data });
 
@@ -81,10 +64,14 @@ export const displayPreviousNextQuestion = questionNumberToDisplay => ({
   questionNumberToDisplay,
 });
 
-export const startChatRoom = history => (dispatch, getState) => {
+export const IMPORTQUESTIONS = 'IMPORTQUESTIONS';
+export const importQuestions = questions => ({
+  type: IMPORTQUESTIONS,
+  questions,
+});
+export const startChatRoom = () => (dispatch, getState) => {
   dispatch(newChatRoomRequest());
   const authToken = getState().auth.authToken;
-  const userId = getState().auth.currentUser.id;
   return fetch(`${API_BASE_URL}/api/chat-room`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${authToken}` },
@@ -93,13 +80,7 @@ export const startChatRoom = history => (dispatch, getState) => {
       return response.json();
     })
     .then(response => {
-      const { url, id, questions: questionsObj } = response;
-      let { questions } = questionsObj;
-      // console.log('questions before shuffle', questions);
-      // questions = shuffle(questions);
-      // console.log('questions after shuffle', questions);
-      dispatch(newChatRoomSuccess(userId, url, id, questions));
-      // history.push(url);
+      const { url } = response;
       return url;
     })
     .catch(err => {
@@ -133,30 +114,4 @@ export const joinRoom = (history, url) => (dispatch, getState) => {
       history.push(url);
     })
     .catch(err => dispatch(joinChatRoomFailure(err)));
-};
-export const leaveChatRoom = history => (dispatch, getState) => {
-  dispatch(leaveChatRoomRequest());
-  const authToken = getState().auth.authToken;
-  const url = history.location.pathname;
-  const userId = getState().auth.currentUser.id;
-  // console.log('the room id: ', roomId);
-  return fetch(`${API_BASE_URL}/api/chat-room/leave-room`, {
-    method: 'PUT',
-    headers: {
-      'content-type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-      url,
-    },
-  })
-    .then(response => {
-      if (response.ok) {
-        // console.log(response);
-        // console.log(history);
-        history.push('/dashboard');
-        dispatch(leaveChatRoomSuccess(userId));
-
-        dispatch(deactivateRoom());
-      }
-    })
-    .catch(err => dispatch(leaveChatRoomFailure(err)));
 };
