@@ -12,19 +12,18 @@ export function LandingPage(props) {
       <h2 className="title">Welcome to Flamingle!</h2>
       <article className="description">
         <p className="content">
-          The hottest new dating app! It's like Tinder, but more random, less
-          awkward, and until we implement more featers, you'll never have (or be
-          able) to talk to the same person twice! Hit HELP in the upper right
-          hand corner for more details.
+          The hottest new dating app. <br />
+          Like Tinder but more random and less awkward
         </p>
       </article>
-
-      <Link to="/login" className="button auth-btn">
-        Login
-      </Link>
-      <Link to="/register" className="button auth-btn">
-        Register
-      </Link>
+      <div className="auth-btn-container">
+        <Link to="/login" className="button auth-btn">
+          Login
+        </Link>
+        <Link to="/register" className="button auth-btn">
+          Register
+        </Link>
+      </div>
     </div>
   );
 }

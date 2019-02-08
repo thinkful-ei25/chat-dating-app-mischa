@@ -1,5 +1,7 @@
 .title {
   text-align: center;
+  color: rgb(116, 28, 33);
+  font-weight: bold;
 }
 
 .register-btn {
@@ -12,11 +14,17 @@
 }
 
 .content {
-  text-align: justify;
+  text-align: center;
+}
+
+.auth-btn-container {
+  display: flex;
+  justify-content: center;
 }
 
 .auth-btn {
+  height: 30px;
   width: 80px;
-  display: block;
-  margin: 0 auto;
+  padding-top: 7px;
+  margin: 0 5px;
 }

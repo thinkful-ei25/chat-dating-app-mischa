@@ -18,8 +18,8 @@ export class Chat extends Component {
   render() {
     return (
       <div className="container box">
-        <div className="background-image" />
         <NavBar />
+
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/dashboard" component={Dashboard} />

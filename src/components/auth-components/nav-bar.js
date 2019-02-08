@@ -13,7 +13,11 @@ export function NavBar({ dispatch }) {
   return (
     <nav className="nav-bar">
       <Link aria-label="home " className="home " to="/dashboard">
-        <img className="logo" src="/flamingo-logo.png" alt="flamingo logo" />
+        <img
+          className="logo"
+          src="/flamingo-logo-pink.png"
+          alt="flamingo logo"
+        />
       </Link>
       <button
         id="infoOverlay"

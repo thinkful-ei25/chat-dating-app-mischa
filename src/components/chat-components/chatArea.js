@@ -84,7 +84,7 @@ export class ChatArea extends Component {
     const { user1, user2 } = this.props;
 
     return (
-      <Fragment>
+      <div className="chat-area-container">
         <section className="users">
           <ul>
             <li className="active-users" key={1}>
@@ -99,16 +99,16 @@ export class ChatArea extends Component {
           <tbody>{chatMessages}</tbody>
         </table>
         {this.renderComponents()}
-
+        <div>TEST ELEMENT</div>
         <Link
           className="button leave-chatroom"
           to="/dashboard"
           onClick={() => this.props.dispatch(wipeMessages())}
         >
-          Leave Room
+          Leave
         </Link>
         <Logout />
-      </Fragment>
+      </div>
     );
   }
 }

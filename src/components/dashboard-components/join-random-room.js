@@ -8,7 +8,7 @@ export class JoinRandomRoom extends Component {
     if (!activeRooms) {
       return (
         <div className="dashboard-content">
-          Start a Pat (chatroom) to get Flamingaling!
+          Start a chatroom to get Flamingaling!
         </div>
       );
     } else {

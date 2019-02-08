@@ -1,24 +1,26 @@
 .nav-bar {
-  background: #838dfa;
-  padding: 10px;
+  /* background: #838dfa; */
+  /* padding: 10px; */
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid grey;
+  /* border-bottom: 1px solid grey; */
 }
 .navButton {
-  background-color: #838dfa;
+  background-color: rgba(131, 141, 250, 0);
+
   color: black;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 5px;
+  border: 0px;
   margin: 10px 0;
   font-weight: bold;
+  cursor: pointer;
 }
 .home {
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(216, 216, 216);
   height: 50px;
   color: black;
@@ -27,13 +29,17 @@
   text-decoration: none;
   font-size: 16px;
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 10px 0; */
   font-weight: bold;
 }
 .logo {
-  height: 30px;
-  background-color: rgba(131, 141, 250, 0);
-  /* border: 1px solid black */
+  margin-left: 10px;
+  height: 45px;
+  color: rgb(0, 0, 0, 0);
+  background-color: rgba(60, 88, 80);
+  padding: 5px 0;
+  /* border: 1px solid black; */
+  border-radius: 100%;
 }
 
 #infoOverlay {

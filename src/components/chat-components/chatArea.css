@@ -1,26 +1,43 @@
-.chat-area{
-  display:block;
-  height: 250px;
+.chat-area-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.chat-area {
+  display: block;
+  height: 600px;
   overflow: auto;
   border: 1px solid grey;
   margin: 0;
   background-color: rgba(196, 139, 158, 0.146);
 }
-
-ul{
+ul {
   list-style-type: none;
-   
 }
-.user{
+.user {
   font-weight: bold;
 }
-.active-users{
+.active-users {
   display: inline;
 }
-.me{
+.me {
   color: rgb(102, 110, 193);
-
 }
-.partner{
+.partner {
   color: rgb(255, 0, 162);
+}
+.leave-chatroom {
+  flex: 1;
+  justify-self: center;
+  height: 30px;
+  width: 80px;
+  padding-top: 7px;
+  /* margin: 0 5px; */
+}
+@media only screen and (max-width: 600px) {
+  .chat-area {
+    margin: 0 10px;
+  }
 }
