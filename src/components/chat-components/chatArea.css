@@ -10,7 +10,9 @@
   height: 600px;
   overflow: auto;
   border: 1px solid grey;
+  border-radius: 5px;
   margin: 0;
+  padding: 10px;
   background-color: rgba(196, 139, 158, 0.146);
 }
 ul {
@@ -18,24 +20,41 @@ ul {
 }
 .user {
   font-weight: bold;
+  margin-top: 5px;
 }
 .active-users {
   display: inline;
 }
-.me {
+.me,
+.my-mess {
   color: rgb(102, 110, 193);
+  text-align: end;
 }
-.partner {
+
+.partner,
+.partner-mess {
   color: rgb(255, 0, 162);
 }
-.leave-chatroom {
-  flex: 1;
-  justify-self: center;
+#leave-chatroom {
+  margin: 10px;
+  align-self: flex-end;
+  width: 85px;
   height: 30px;
-  width: 80px;
-  padding-top: 7px;
   /* margin: 0 5px; */
 }
+
+.input-flex-container {
+  padding: 10px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 10px;
+}
+.write-message,
+.message-btn {
+  margin: 0;
+  height: 30px;
+}
+
 @media only screen and (max-width: 600px) {
   .chat-area {
     margin: 0 10px;

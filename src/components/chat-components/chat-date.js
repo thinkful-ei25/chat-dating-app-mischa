@@ -16,9 +16,10 @@ import { connect } from 'react-redux';
 // --> action(isMobile())
 export class Chat extends Component {
   render() {
+    const { loggedIn } = this.props;
     return (
       <div className="container box">
-        <NavBar />
+        <NavBar loggedIn={loggedIn} />
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -36,11 +37,6 @@ export class Chat extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
-    inChatroom: state.chatRoom
-      ? state.chatRoom.users.filter(
-          user => user.id === state.auth.currentUser.id
-        )
-      : null,
   };
 };
 export default withRouter(connect(mapStateToProps)(Chat));

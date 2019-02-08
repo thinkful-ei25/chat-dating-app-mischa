@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 import { overlay } from '../../actions/auth';
 import InfoOverlay from './infoOverlay';
-
+import Logout from './logout';
 import './nav-bar.css';
 function onInfoClickHandler(dispatch) {
   dispatch(overlay(true));
 }
-export function NavBar({ dispatch }) {
+export function NavBar({ dispatch, loggedIn }) {
   return (
     <nav className="nav-bar">
       <Link aria-label="home " className="home " to="/dashboard">
@@ -28,6 +28,7 @@ export function NavBar({ dispatch }) {
       >
         HELP
       </button>
+      {loggedIn ? <Logout /> : null}
       <InfoOverlay />
     </nav>
   );

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import JoinRandomRoom from './join-random-room';
 import NewChatRoom from '../chat-components/newChatRoomBtn';
-import Logout from '../auth-components/logout';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import { getActiveRoomsSuccess } from '../../actions/dashboard';
@@ -34,8 +33,7 @@ export class Dashboard extends Component {
         {activeRooms ? (
           <div className="dashboard-content">Or start your own chatroom</div>
         ) : null}
-        <NewChatRoom />
-        <Logout />
+        <NewChatRoom className="start-chat" />
       </main>
     );
   }

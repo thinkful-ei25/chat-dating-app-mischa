@@ -3,11 +3,24 @@
   /* padding: 10px; */
   display: flex;
   justify-content: space-between;
-  /* border-bottom: 1px solid grey; */
+  align-items: center;
+  height: 80px;
+  margin: 0 10px;
 }
+
+.logout {
+  border-radius: 100%;
+  background-color: rgba(60, 88, 80);
+  text-align: center;
+  color: rgb(241, 184, 185);
+  font-weight: bold;
+  font-variant: small-caps;
+  padding: 18px 5px;
+  width: 52px;
+}
+
 .navButton {
   background-color: rgba(131, 141, 250, 0);
-
   color: black;
   padding: 5px 10px;
   text-align: center;
@@ -20,20 +33,9 @@
   cursor: pointer;
 }
 .home {
-  /* background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(216, 216, 216);
-  height: 50px;
-  color: black;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 5px;
-  margin: 10px 0; */
   font-weight: bold;
 }
 .logo {
-  margin-left: 10px;
   height: 45px;
   color: rgb(0, 0, 0, 0);
   background-color: rgba(60, 88, 80);
@@ -43,4 +45,10 @@
 }
 
 #infoOverlay {
+  background-color: rgba(60, 88, 80);
+  text-align: center;
+  color: rgb(241, 184, 185);
+  font-weight: bold;
+  font-variant: small-caps;
+  border-radius: 5px;
 }

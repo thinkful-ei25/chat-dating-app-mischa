@@ -15,9 +15,8 @@ export class JoinRandomRoom extends Component {
       return (
         <section className="random-room">
           <Link to={activeRooms} className="button">
-            Join Pat
+            Join a room
           </Link>
-          (aka chatroom)
         </section>
       );
     }

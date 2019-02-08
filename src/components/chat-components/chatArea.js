@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchMessages, newMessage } from '../../actions/chat';
+import { newMessage } from '../../actions/chat';
 import { userJoined, deactivateRoom } from '../../actions/chat-room';
 import { wipeMessages } from '../../actions/chat';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import Input from './input';
-import Logout from '../auth-components/logout';
+
 import Questions from './questions';
 import './chatArea.css';
 
@@ -61,53 +61,72 @@ export class ChatArea extends Component {
     }
   }
   render() {
-    if (!this.props.loggedIn) {
-      this.props.history.push('/');
+    const {
+      loggedIn,
+      messages,
+      username,
+      history,
+      waiting,
+      user1,
+      user2,
+    } = this.props;
+    if (!loggedIn) {
+      history.push('/');
       return null;
     }
-    const chatMessages = this.props.messages.map(message => {
-      return (
-        <tr key={message.id}>
-          {/* <th>  header*/}
-          <td
-            className={
-              message.user === this.props.username ? 'me user' : 'partner user'
-            }
-          >
-            {message.user}:
-          </td>
-          <td>{message.message}</td>
-        </tr>
+    let chatMessages;
+    waiting
+      ? (chatMessages = <div>Waiting for someone to join!</div>)
+      : (chatMessages = messages.map((message, i) => {
+          return (
+            <div key={i}>
+              <div
+                className={
+                  message.user === username ? 'me user' : 'partner user'
+                }
+              >
+                <div
+                  className={
+                    message.user === username
+                      ? 'message my-mess'
+                      : 'message partner-mess'
+                  }
+                >
+                  {message.message}
+                </div>
+              </div>
+            </div>
+          );
+        }));
+    if (
+      !chatMessages.length &&
+      user1 &&
+      user1.username &&
+      user2 &&
+      user2.username
+    ) {
+      chatMessages.push(
+        <div>
+          {user1.username} joined! <br />
+          {user2.username} joined!
+        </div>
       );
-    });
-
-    const { user1, user2 } = this.props;
-
+    }
     return (
       <div className="chat-area-container">
-        <section className="users">
-          <ul>
-            <li className="active-users" key={1}>
-              <div> {user1 && user1.username}</div>
-            </li>
-            <li className="active-users" key={2}>
-              <div> {user2 && user2.username}</div>
-            </li>
-          </ul>
-        </section>
-        <table className="messages chat-area">
-          <tbody>{chatMessages}</tbody>
-        </table>
-        {this.renderComponents()}
-        <div>TEST ELEMENT</div>
         <Link
-          className="button leave-chatroom"
+          id="leave-chatroom"
+          className="button"
           to="/dashboard"
           onClick={() => this.props.dispatch(wipeMessages())}
         >
           Leave
         </Link>
-        <Logout />
+
+        <div className="messages chat-area">
+          <div>{chatMessages}</div>
+        </div>
+        {this.renderComponents()}
       </div>
     );
   }
