@@ -1,31 +1,34 @@
-import React,{Component} from 'react';
-import {connect} from 'react-redux';
-import {startChatRoom} from '../../actions/chat-room';
-import {withRouter, Redirect} from 'react-router-dom';
-import './newChatRoomBtn.css'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { startChatRoom } from '../../actions/chat-room';
+import { Redirect } from 'react-router-dom';
+import './newChatRoomBtn.css';
 export class NewChatRoom extends Component {
   state = {
     chatRoomUrl: null,
-    submitted: false
+    submitted: false,
+  };
+  onClickHandler() {
+    this.props.dispatch(startChatRoom(this.props.history)).then(url => {
+      this.setState({
+        submitted: true,
+        chatRoomUrl: url,
+      });
+    });
   }
-  onClickHandler(){
-    this.props.dispatch(startChatRoom(this.props.history))
-      .then((url)=> {
-        console.log(url);
-        this.setState({
-          submitted: true,
-          chatRoomUrl: url
-        })
-      })
-  }
-  render(){
-    if(this.state.submitted){
-     return <Redirect to={this.state.chatRoomUrl}/>
+  render() {
+    if (this.state.submitted) {
+      return <Redirect to={this.state.chatRoomUrl} />;
     }
     return (
-      <button className="button open-room" onClick={()=>this.onClickHandler()}>Start a new pat!</button>
-    )
+      <button
+        className="button open-room"
+        onClick={() => this.onClickHandler()}
+      >
+        Start a chatroom
+      </button>
+    );
   }
 }
 
-export default withRouter(connect()(NewChatRoom));
+export default connect()(NewChatRoom);

@@ -2,16 +2,13 @@ import {
   NEWCHATROOMREQUEST,
   NEWCHATROOMSUCCESS,
   NEWCHATROOMFAILURE,
-  JOINCHATROOMREQUEST,
-  JOINCHATROOMSUCCESS,
-  JOINCHATROOMFAILURE,
   REFRESHCHATROOMSTATE,
   DEACTIVATEROOM,
   DISPLAYPREVIOUSNEXTQUESTION,
   USERJOINED,
   IMPORTQUESTIONS,
 } from '../actions/chat-room';
-import { arrayIsEmpty, shuffle } from '../utils';
+import { shuffle } from '../utils';
 
 const initialState = {
   loading: false,

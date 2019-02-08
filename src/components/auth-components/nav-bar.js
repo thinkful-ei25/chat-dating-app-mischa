@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 import { overlay } from '../../actions/auth';
 import InfoOverlay from './infoOverlay';
-
+import Logout from './logout';
 import './nav-bar.css';
 function onInfoClickHandler(dispatch) {
   dispatch(overlay(true));
 }
-export function NavBar({ dispatch }) {
+export function NavBar({ dispatch, loggedIn }) {
   return (
-    <nav>
+    <nav className="nav-bar">
       <Link aria-label="home " className="home " to="/dashboard">
-        {/* <div className='logo' style={divStyle}> */}
-        FLAM
-        <img className="logo" src="/flamingo-logo.png" alt="flamingo logo" />
-        {/* </div> */}
-        NGLE
+        <img
+          className="logo"
+          src="/flamingo-logo-pink.png"
+          alt="flamingo logo"
+        />
       </Link>
       <button
         id="infoOverlay"
@@ -28,6 +28,7 @@ export function NavBar({ dispatch }) {
       >
         HELP
       </button>
+      {loggedIn ? <Logout /> : null}
       <InfoOverlay />
     </nav>
   );

@@ -14,17 +14,17 @@ export default class Input extends Component {
   }
   render() {
     return (
-      <form onSubmit={e => this.onSubmit(e)}>
+      <form className="input-flex-container" onSubmit={e => this.onSubmit(e)}>
         <input
           aria-label="input"
-          className="messages"
+          className="write-message"
           style={{ width: '85%', marginRight: '10px' }}
           type="text"
           placeholder="say something"
           ref={input => (this.chat = input)}
         />
 
-        <button className="button" type="submit">
+        <button className="button message-btn" type="submit">
           send
         </button>
       </form>

@@ -1,38 +1,57 @@
-.box *{ box-sizing: border-box;}
-.container{
+.box * {
   box-sizing: border-box;
-  border : 1px solid #000;
+  font-family: 'Josefin Sans';
+}
+body {
+  background-color: rgb(241, 184, 185);
+}
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: stretch;
+  flex-flow: column nowrap;
   color: black;
   margin: 30px auto 10px auto;
   width: 70%;
-  padding: 0 10px 10px 10px;
+  height: 100%;
+  max-width: 650px;
   border-radius: 5px;
-  background-color: rgb(240, 255, 255, .6) 
+  background-color: rgb(243, 197, 198, 0);
+  z-index: 0;
+  /* border: 1px solid black; */
 }
 
-.background-image{
-  background-image: url('http://i66.tinypic.com/2vuzllc.jpg');
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+.background-image {
+  background-image: url('/Users/misch/Thinkful/react-capstone/chat-date/public/squiggle.png');
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  opacity: .6;
-  z-index: -1;
+  z-index: 2;
   background-repeat: repeat-x;
 }
 
-.button{
-    background-color: rgb(131, 141, 250);
-    border: .5px solid grey;
-    color: black;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    font-weight: bold;
+.button {
+  background-color: rgba(60, 88, 80);
+  margin-top: 10px;
+  box-shadow: #d4888b77;
+  color: black;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  color: rgb(241, 184, 185);
+  font-weight: bold;
+  font-variant: small-caps;
+  padding-top: 7px;
+  margin: 0 5px;
+  /* font-family: 'Roboto'; */
 }
 
 @media only screen and (max-width: 600px) {
@@ -40,6 +59,5 @@
     width: 100%;
     height: 40em;
     /* font-size: 30px; */
-    margin-top: 10px;
   }
 }

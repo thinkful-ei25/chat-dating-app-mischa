@@ -1,12 +1,18 @@
-.questions-area{
-  border: 1px solid black;
-  margin-top: 4px;
-  padding: 10px;
+.questions-area {
+  height: 100px;
+  display: flex;
+  flex-flow: column;
+  margin-top: 10px;
+  align-items: center;
 }
-.questions{
+.questions {
   font-weight: bold;
+  margin-bottom: 10px;
+}
+.question-btns {
+  display: flex;
 }
 
-.send{
+.send {
   margin: 0 10px;
 }

@@ -1,26 +1,40 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
-import { API_BASE_URL } from '../../config';
-import io from 'socket.io-client';
-import ActiveRooms from './active-rooms';
+import { Redirect } from 'react-router-dom';
 import JoinRandomRoom from './join-random-room';
 import NewChatRoom from '../chat-components/newChatRoomBtn';
-import Logout from '../auth-components/logout';
+import io from 'socket.io-client';
+import { API_BASE_URL } from '../../config';
+import { getActiveRoomsSuccess } from '../../actions/dashboard';
+import './dashboard.css';
 
 export class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.socket = io(API_BASE_URL);
+  }
+  componentDidMount() {
+    this.socket.emit('find-room');
+    this.socket.on('active-rooms', data => {
+      this.props.dispatch(getActiveRoomsSuccess(data));
+    });
+  }
+  componentWillUnmount() {
+    this.socket.disconnect();
+  }
   render() {
-    if (!this.props.loggedIn) {
+    const { loggedIn, activeRooms } = this.props;
+    if (!loggedIn) {
       return <Redirect to="/" />;
     }
     return (
-      <Fragment>
-        <ActiveRooms />
+      <main className="dashboard">
         <JoinRandomRoom />
-        <h3>Do you want to start a new Pat (chatroom)?</h3>
-        <NewChatRoom />
-        <Logout />
-      </Fragment>
+        {activeRooms ? (
+          <div className="dashboard-content">Or start your own chatroom</div>
+        ) : null}
+        <NewChatRoom className="start-chat" />
+      </main>
     );
   }
 }
@@ -28,7 +42,8 @@ export class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.auth.currentUser !== null,
+    activeRooms: state.dashboard && state.dashboard.activeRooms,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Dashboard));
+export default connect(mapStateToProps)(Dashboard);

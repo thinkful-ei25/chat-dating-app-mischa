@@ -1,26 +1,30 @@
-.title{
-  text-align: center
+.title {
+  text-align: center;
+  color: rgb(116, 28, 33);
+  font-weight: bold;
 }
 
-.register-btn{
+.register-btn {
   border-radius: 5px;
 }
 
-.description{
+.description {
   width: 75%;
   margin: 0 auto 15px auto;
 }
 
-.content{
-  text-align: justify;
-}
-.auth-butn-container{
-  width: 100%;
-  display: table;
+.content {
   text-align: center;
 }
 
-.auth-btn{
-  display: inline-block;
-  margin: 0 10px;
+.auth-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-btn {
+  height: 30px;
+  width: 80px;
+  padding-top: 7px;
+  margin: 0 5px;
 }

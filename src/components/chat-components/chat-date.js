@@ -16,10 +16,11 @@ import { connect } from 'react-redux';
 // --> action(isMobile())
 export class Chat extends Component {
   render() {
+    const { loggedIn } = this.props;
     return (
       <div className="container box">
-        <div className="background-image" />
-        <NavBar />
+        <NavBar loggedIn={loggedIn} />
+
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/dashboard" component={Dashboard} />
@@ -27,7 +28,7 @@ export class Chat extends Component {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegistrationPage} />
           <Route exact path="/chat-room/:newRoom" component={ChatArea} />
-          {/* <Route component={NoMatch} /> */}
+          <Route component={NoMatch} />
         </Switch>
       </div>
     );
@@ -36,11 +37,6 @@ export class Chat extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.auth.currentUser ? state.auth.currentUser.loggedIn : null,
-    inChatroom: state.chatRoom
-      ? state.chatRoom.users.filter(
-          user => user.id === state.auth.currentUser.id
-        )
-      : null,
   };
 };
 export default withRouter(connect(mapStateToProps)(Chat));

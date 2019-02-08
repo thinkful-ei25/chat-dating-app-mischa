@@ -1,6 +1,5 @@
-/* @media screen and (max-width: 600px){
-  .open-room{
-    position: absolute;
-    bottom: 0;
-  }
-} */
+.open-room {
+  align-self: center;
+  max-width: 100px;
+  margin-top: 20px;
+}
