@@ -25,7 +25,7 @@ Flamingle is a dating app for those of us with severe social anxiety! Don't worr
 
 ### **`LINKS`**
 
-[Live App](https://flamingle.mischaberlin.com/)
+[Live App](https://www.flamingle.mischaberlin.com/)
 
 **Github repos here:**
 
