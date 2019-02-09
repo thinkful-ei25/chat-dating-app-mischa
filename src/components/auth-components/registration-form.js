@@ -3,6 +3,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../actions/users';
 import { login } from '../../actions/auth';
 import Input from './input';
+import DemoBtn from './DemoBtn';
 import {
   required,
   nonEmpty,
@@ -74,6 +75,8 @@ export class RegistrationForm extends React.Component {
         >
           Register
         </button>
+        <DemoBtn demo={1} />
+        <DemoBtn demo={2} />
       </form>
     );
   }

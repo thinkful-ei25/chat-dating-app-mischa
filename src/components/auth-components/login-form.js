@@ -3,7 +3,6 @@ import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import { login } from '../../actions/auth';
 import { required, nonEmpty } from '../../validators';
-import DemoBtn from './DemoBtn';
 import './login-form.css';
 export class LoginForm extends Component {
   onSubmit(values) {
@@ -54,8 +53,6 @@ export class LoginForm extends Component {
         >
           Log in
         </button>
-        <DemoBtn demo={1} />
-        <DemoBtn demo={2} />
       </form>
     );
   }
