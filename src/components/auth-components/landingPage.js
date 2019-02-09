@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import './landingPage.css';
-
+import DemoBtn from './DemoBtn';
 export function LandingPage(props) {
   if (props.loggedIn) {
     return <Redirect to="/dashboard" />;
