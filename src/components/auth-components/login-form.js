@@ -4,6 +4,7 @@ import Input from './input';
 import { login } from '../../actions/auth';
 import { required, nonEmpty } from '../../validators';
 import './login-form.css';
+import { connect } from 'react-redux';
 import Loader from '../loader';
 export class LoginForm extends Component {
   onSubmit(values) {
@@ -11,13 +12,12 @@ export class LoginForm extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    const { error: err, loading } = this.props;
     let error;
-    if (this.props.error) {
-      //   console.log('error:',this.props.error);
+    if (err) {
       error = (
         <div className="form-error" aria-live="polite">
-          {this.props.error}
+          {err}
         </div>
       );
     }
@@ -47,17 +47,27 @@ export class LoginForm extends Component {
           id="password"
           validate={[required, nonEmpty]}
         />
-        <button
-          className="button input-form login-btn"
-          disabled={this.props.pristine || this.props.submitting}
-        >
-          Log in
-        </button>
+        {loading ? (
+          <Loader />
+        ) : (
+          <button
+            className="button input-form login-btn"
+            disabled={this.props.pristine || this.props.submitting}
+          >
+            Log in
+          </button>
+        )}
       </form>
     );
   }
 }
-
+const mapStateToProps = state => {
+  const { loading } = state.auth;
+  return {
+    loading,
+  };
+};
+LoginForm = connect(mapStateToProps)(LoginForm);
 export default reduxForm({
   form: 'login',
   onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username')),
