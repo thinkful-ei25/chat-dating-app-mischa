@@ -18,8 +18,8 @@
   border: 1px solid grey;
   border-radius: 5px;
   margin: 0;
-  padding: 10px;
-  background-color: rgba(196, 139, 158, 0.146);
+  padding: 10px 5px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 ul {
   list-style-type: none;
@@ -31,16 +31,16 @@ ul {
 
 .user {
   font-weight: bold;
-  padding: 5px;
-  margin-bottom: 5px;
   border-radius: 0.4em;
   clear: both;
-  max-width: 65%;
+  max-width: 80%;
 }
 
 .message {
   max-width: 100%;
   overflow-wrap: break-word;
+  line-height: 1.4;
+  margin-bottom: 5px;
 }
 .me {
   float: right;
