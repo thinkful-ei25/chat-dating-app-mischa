@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import JoinRandomRoom from './join-random-room';
-import NewChatRoom from '../chat-components/newChatRoomBtn';
+import NewChatRoom from '../NewChatRoom';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import { getActiveRoomsSuccess } from '../../actions/dashboard';

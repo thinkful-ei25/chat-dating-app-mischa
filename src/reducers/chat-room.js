@@ -24,6 +24,7 @@ const initialState = {
   questions: null,
   questionNumberToDisplay: 0,
   waiting: false,
+  timesUp: false,
 };
 
 function reducer(state = initialState, action) {
@@ -62,8 +63,9 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         active: false,
-        user1: action.data.user1,
-        user2: action.data.user2,
+        user1: { ...state.user1, ...action.data.user1 },
+        user2: { ...state.user2, ...action.data.user2 },
+        timesUp: action.data.timesUp || state.timesUp,
       };
 
     case REFRESHCHATROOMSTATE:

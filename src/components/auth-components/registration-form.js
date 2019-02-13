@@ -12,7 +12,7 @@ import {
   length,
   isTrimmed,
 } from '../../validators';
-import Loader from '../loader';
+import Loader from '../Loader';
 import './registration-form.css';
 const passwordLength = length({ min: 10, max: 72 });
 const matchesPassword = matches('password');

@@ -1,5 +1,5 @@
 import React from 'react';
-import PreviousNextBtn from './previousNextBtn';
+import PreviousNextBtn from '../PreviousNextBtn';
 import './questions.css';
 
 function onClick(socket, question, url, username) {

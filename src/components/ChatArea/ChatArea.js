@@ -6,11 +6,12 @@ import { userJoined, deactivateRoom } from '../../actions/chat-room';
 import { wipeMessages } from '../../actions/chat';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
-import Input from './input';
+import classNames from 'classnames';
+import Input from '../chat-components/input';
 import Timer from '../timer';
 
-import Questions from './questions';
-import './chatArea.css';
+import Questions from '../Questions';
+import './ChatArea.css';
 
 export class ChatArea extends Component {
   constructor(props) {
@@ -42,11 +43,7 @@ export class ChatArea extends Component {
     // const numberOfUsers = this.props.activeUsers.length;
     const { username, questions, number, url, active, waiting } = this.props;
     const question = questions[number];
-    if (!active) {
-      return <div>Your partner left!</div>;
-    } else if (waiting) {
-      return;
-    } else {
+    if (active && !waiting) {
       return (
         <Fragment>
           <Questions
@@ -59,8 +56,20 @@ export class ChatArea extends Component {
           <Input socket={this.socket} url={url} username={username} />
         </Fragment>
       );
+    } else {
+      return;
     }
   }
+  timer = ({ minutes }) => {
+    const { dispatch } = this.props;
+    if (minutes < 0) {
+      dispatch(
+        deactivateRoom({
+          timesUp: true,
+        })
+      );
+    }
+  };
   render() {
     const {
       loggedIn,
@@ -71,6 +80,7 @@ export class ChatArea extends Component {
       user1,
       user2,
       active,
+      timesUp,
     } = this.props;
     if (!loggedIn) {
       history.push('/');
@@ -88,16 +98,17 @@ export class ChatArea extends Component {
           return (
             <div key={i}>
               <div
-                className={
-                  message.user === username ? 'me user' : 'partner user'
-                }
+                animation-name="warning"
+                className={classNames(
+                  message.user === username ? 'me' : 'partner',
+                  'user'
+                )}
               >
                 <div
-                  className={
-                    message.user === username
-                      ? 'message my-mess'
-                      : 'message partner-mess'
-                  }
+                  className={classNames(
+                    message.user === username ? 'my-mess' : 'partner-mess',
+                    'message'
+                  )}
                 >
                   {message.message}
                 </div>
@@ -113,7 +124,7 @@ export class ChatArea extends Component {
       user2.username
     ) {
       chatMessages.push(
-        <div>
+        <div key={1}>
           {user1.username} joined! <br />
           {user2.username} joined!
         </div>
@@ -121,15 +132,25 @@ export class ChatArea extends Component {
     }
     return (
       <div className="chat-area-container">
-        <Link
-          id="leave-chatroom"
-          className="button"
-          to="/dashboard"
-          onClick={() => this.props.dispatch(wipeMessages())}
-        >
-          Leave
-        </Link>
-        {active && !waiting && <Timer />}
+        <div className="tools-container">
+          {active && !waiting ? (
+            <Timer time={{ minutes: 5, seconds: 0 }} callback={this.timer} />
+          ) : timesUp ? (
+            <div>Times Up!</div>
+          ) : !active && !waiting ? (
+            <div>Your Partner Left!</div>
+          ) : (
+            <div />
+          )}
+          <Link
+            id="leave-chatroom"
+            className="button"
+            to="/dashboard"
+            onClick={() => this.props.dispatch(wipeMessages())}
+          >
+            Leave
+          </Link>
+        </div>
         <div className="messages chat-area">
           <div>{chatMessages}</div>
         </div>
@@ -149,6 +170,7 @@ const mapStatetoProps = (state, ownProps) => {
     waiting,
     questions,
     questionNumberToDisplay: number,
+    timesUp,
   } = chatroom;
   return {
     messages: chat.chatWindow,
@@ -161,6 +183,7 @@ const mapStatetoProps = (state, ownProps) => {
     waiting,
     questions,
     number,
+    timesUp,
   };
 };
 export default connect(mapStatetoProps)(ChatArea);

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { pad } from './utils';
+import classNames from 'classnames';
+import './Timer.css';
 export default class Timer extends Component {
   constructor(props) {
     super(props);
@@ -7,7 +9,14 @@ export default class Timer extends Component {
   }
 
   componentDidMount() {
-    this.setState({ minutes: 5, seconds: 0 });
+    let { minutes, seconds } = this.props.time;
+    if (!minutes) {
+      minutes = 0;
+    }
+    if (!seconds) {
+      seconds = 0;
+    }
+    this.setState({ minutes, seconds });
     this.timer = setInterval(() => {
       let { minutes, seconds } = this.state;
       if (seconds === 0) {
@@ -27,9 +36,12 @@ export default class Timer extends Component {
     this.timer = clearInterval();
   }
   render() {
+    const { callback } = this.props;
+    callback(this.state);
     const { minutes, seconds } = this.state;
+    const addWarning = minutes < 1;
     return (
-      <div>
+      <div className={classNames('timer', addWarning && 'warning')}>
         {minutes}:{pad(seconds)}
       </div>
     );

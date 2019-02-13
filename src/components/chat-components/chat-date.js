@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
-import ChatArea from './chatArea';
+import ChatArea from '../ChatArea';
 import Dashboard from '../dashboard-components/dashboard';
 import NavBar from '../auth-components/nav-bar';
 import RegistrationPage from '../auth-components/registration-page';

@@ -4,6 +4,12 @@
   justify-content: center;
   width: 100%;
 }
+.tools-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
 
 .chat-area {
   display: block;
@@ -18,26 +24,37 @@
 ul {
   list-style-type: none;
 }
-.user {
-  font-weight: bold;
-  margin-top: 5px;
-}
+
 .active-users {
   display: inline;
 }
-.me,
-.my-mess {
-  color: rgb(102, 110, 193);
-  text-align: end;
+
+.user {
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 0.4em;
+  clear: both;
+  max-width: 65%;
 }
 
-.partner,
+.message {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.me {
+  float: right;
+}
+
+.my-mess {
+  color: rgb(102, 110, 193);
+  float: right;
+}
 .partner-mess {
+  float: left;
   color: rgb(255, 0, 162);
 }
 #leave-chatroom {
-  margin: 10px;
-  align-self: flex-end;
   width: 85px;
   height: 30px;
 }
