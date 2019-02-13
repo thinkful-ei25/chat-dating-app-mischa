@@ -4,6 +4,7 @@ import Input from './input';
 import { login } from '../../actions/auth';
 import { required, nonEmpty } from '../../validators';
 import './login-form.css';
+import Loader from '../loader';
 export class LoginForm extends Component {
   onSubmit(values) {
     return this.props.dispatch(login(values.username, values.password));
@@ -41,7 +42,6 @@ export class LoginForm extends Component {
         <Field
           className="input-form"
           component={Input}
-          // component='input'
           type="password"
           name="password"
           id="password"

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../actions/users';
 import { login } from '../../actions/auth';
@@ -11,11 +12,12 @@ import {
   length,
   isTrimmed,
 } from '../../validators';
+import Loader from '../loader';
 import './registration-form.css';
 const passwordLength = length({ min: 10, max: 72 });
 const matchesPassword = matches('password');
 
-export class RegistrationForm extends React.Component {
+export class RegistrationForm extends Component {
   onSubmit(values) {
     const { username, password, firstName, lastName } = values;
     const user = { username, password, firstName, lastName };
@@ -25,6 +27,7 @@ export class RegistrationForm extends React.Component {
   }
 
   render() {
+    const { loading } = this.props;
     return (
       <form
         className="registration input-form"
@@ -68,20 +71,33 @@ export class RegistrationForm extends React.Component {
           name="passwordConfirm"
           validate={[required, nonEmpty, matchesPassword]}
         />
-        <button
-          className="button register-btn"
-          type="submit"
-          disabled={this.props.pristine || this.props.submitting}
-        >
-          Register
-        </button>
-        <DemoBtn demo={1} />
-        <DemoBtn demo={2} />
+
+        {loading ? (
+          <Loader />
+        ) : (
+          <Fragment>
+            <button
+              className="button register-btn"
+              type="submit"
+              disabled={this.props.pristine || this.props.submitting}
+            >
+              Register
+            </button>
+            <DemoBtn demo={1} />
+            <DemoBtn demo={2} />
+          </Fragment>
+        )}
       </form>
     );
   }
 }
-
+const mapStateToProps = state => {
+  const { loading } = state.auth;
+  return {
+    loading,
+  };
+};
+RegistrationForm = connect(mapStateToProps)(RegistrationForm);
 export default reduxForm({
   form: 'registration',
   onSubmitFail: (errors, dispatch) =>
