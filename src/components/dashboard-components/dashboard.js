@@ -6,7 +6,6 @@ import NewChatRoom from '../NewChatRoom';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import { getActiveRoomsSuccess } from '../../actions/dashboard';
-import Timer from '../timer';
 import './dashboard.css';
 
 export class Dashboard extends Component {
