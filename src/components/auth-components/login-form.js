@@ -5,7 +5,7 @@ import { login } from '../../actions/auth';
 import { required, nonEmpty } from '../../validators';
 import './login-form.css';
 import { connect } from 'react-redux';
-import Loader from '../Loader';
+import Loader from '../Loader/index';
 export class LoginForm extends Component {
   onSubmit(values) {
     return this.props.dispatch(login(values.username, values.password));
