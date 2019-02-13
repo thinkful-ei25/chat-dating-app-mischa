@@ -7,6 +7,7 @@ import { wipeMessages } from '../../actions/chat';
 import io from 'socket.io-client';
 import { API_BASE_URL } from '../../config';
 import Input from './input';
+import Timer from '../timer';
 
 import Questions from './questions';
 import './chatArea.css';
@@ -44,7 +45,7 @@ export class ChatArea extends Component {
     if (!active) {
       return <div>Your partner left!</div>;
     } else if (waiting) {
-      return <div>waiting</div>;
+      return;
     } else {
       return (
         <Fragment>
@@ -69,6 +70,7 @@ export class ChatArea extends Component {
       waiting,
       user1,
       user2,
+      active,
     } = this.props;
     if (!loggedIn) {
       history.push('/');
@@ -76,7 +78,12 @@ export class ChatArea extends Component {
     }
     let chatMessages;
     waiting
-      ? (chatMessages = <div>Waiting for someone to join!</div>)
+      ? (chatMessages = (
+          <div>
+            As soon as another user joins the room, you'll be able to see the
+            questions and type!
+          </div>
+        ))
       : (chatMessages = messages.map((message, i) => {
           return (
             <div key={i}>
@@ -122,7 +129,7 @@ export class ChatArea extends Component {
         >
           Leave
         </Link>
-
+        {active && !waiting && <Timer />}
         <div className="messages chat-area">
           <div>{chatMessages}</div>
         </div>
